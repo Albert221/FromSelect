@@ -1,6 +1,4 @@
 .idea/
-
 node_modules/
 vendor/
 public/assets/
-composer.lock
