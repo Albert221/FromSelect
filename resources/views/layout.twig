@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title '' %}FromSelect</title>
+        <link rel="stylesheet" href="{{ base_url() }}/assets/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&amp;subset=latin-ext" rel="stylesheet">
+        {% block head '' %}
+    </head>
+    <body>
+        <div class="sidebar">
+            <header class="header">
+                <h1>FromSelect</h1>
+                <nav>
+                    <h2>Links</h2>
+                    <ul>
+                        <li><a href="https://github.com/Albert221/FromSelect">Website</a></li>
+                        <li><a href="https://github.com/Albert221/FromSelect/issues/new">Report a bug</a></li>
+                    </ul>
+                </nav>
+            </header>
+            <nav class="databases">
+                <a href="#" class="new">New database</a>
+                <form action="#" method="post" class="search">
+                    <label for="search">Search for a database</label>
+                    <input type="search" id="search" name="search" placeholder="Search..." required>
+                </form>
+                <h2>Databases</h2>
+                <ul class="list">
+                    {% for database, tables in databases %}
+                        <li {{ current.database == database ? 'class="active"' : '' }}>
+                            <a href="#">{{ database }}</a>
+                            <ul>
+                                {% for table in tables %}
+                                    <li {{ current.table == table ? 'class="active"' : '' }}><a href="#">{{ table }}</a></li>
+                                {% else %}
+                                    <li>No databases</li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+        <main class="main">
+            {% block main '' %}
+        </main>
+        {% block scripts '' %}
+    </body>
+</html>

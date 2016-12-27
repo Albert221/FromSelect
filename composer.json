@@ -1,0 +1,22 @@
+{
+    "name": "albert221/fromselect",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Albert",
+            "email": "w.albert221@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6",
+        "twig/twig": "^1.30",
+        "slim/slim": "^3.7",
+        "slim/twig-view": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "FromSelect\\": "src/"
+        }
+    }
+}

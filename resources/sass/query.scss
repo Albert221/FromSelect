@@ -1,0 +1,22 @@
+.query {
+    margin-bottom: 15px;
+    
+    code {
+        display: block;
+        padding: 15px;
+        color: #aeaeae;
+        background: #191919;
+
+        .query-keyword {
+            color: #69d2e7;
+        }
+
+        .query-operator {
+            color: #f38630;
+        }
+
+        .query-numeric {
+            color: #cca300;
+        }
+    }
+}

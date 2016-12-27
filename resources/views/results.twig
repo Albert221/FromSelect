@@ -1,0 +1,93 @@
+{% extends '@fromselect/layout.twig' %}
+
+{% block main %}
+    <nav class="table-navigation">
+        <h2>Table navigation</h2>
+        <ul>
+            <li class="current"><a href="#">Data</a></li>
+            <li><a href="#">Structure</a></li>
+            <li><a href="#">Operations</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        <pre class="query"><code><span class="query-keyword">SELECT</span> * <span class="query-keyword">FROM</span> `users` <span class="query-keyword">LIMIT</span> <span class="query-numeric">0</span>, <span class="query-numeric">25</span></code></pre>
+        <div class="columns">
+            <nav class="data-navigation">
+                <h2>Navigation</h2>
+                <ul class="pages">
+                    <li class="current"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">Next ></a></li>
+                    <li><a href="#">Last >></a></li>
+                </ul>
+                <form action="#" method="get" class="jump">
+                    <label for="jump">Jump to:</label>
+                    <select name="jump" id="jump" required>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </form>
+                <form action="#" method="get" class="per-page">
+                    <label for="perPage">Rows per page:</label>
+                    <input type="number" name="perPage" id="perPage" value="25" step="25" min="1" required>
+                </form>
+            </nav>
+            <form action="#" method="post" class="actions" id="actions">
+                <span>Selected:</span>
+                <input type="submit" value="Delete">
+            </form>
+        </div>
+        <table class="main-table">
+            <thead>
+            <tr>
+                <th></th>
+                <th><a href="#">id</a></th>
+                <th><a href="#">email</a></th>
+                <th><a href="#">visible_name</a></th>
+                <th><a href="#">password</a></th>
+                <th><a href="#">role</a></th>
+                <th><a href="#">activated</a></th>
+                <th><a href="#">activation_hash</a></th>
+                <th><a href="#">banned</a></th>
+                <th><a href="#">remind_hash</a></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <input type="checkbox" name="row[]" value="1" form="actions">
+                    <a href="#">Edit</a>
+                    <a href="#">Delete</a>
+                </td>
+                <td>1</td>
+                <td>w.albert221@gmail.com</td>
+                <td>Albert221</td>
+                <td>$2a$12$9NZPxKUimD4cvs7gznIyrOgiateIzDhCx4O9lcbdOtUeuQCLY1bPa</td>
+                <td>1</td>
+                <td>1</td>
+                <td>f2ccc14e38a8e31a</td>
+                <td>0</td>
+                <td>868199b2ee53e022</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" name="row[]" value="2" form="actions">
+                    <a href="#">Edit</a>
+                    <a href="#">Delete</a>
+                </td>
+                <td>2</td>
+                <td>nextgenerationpl@gmail.com</td>
+                <td>Accro</td>
+                <td>$2a$12$2kHbrQJ4iiT8y9Ssu5.3B.U.u2cavhD2EKe7Ed432Xslmrk/34tae</td>
+                <td>0</td>
+                <td>1</td>
+                <td>4573cd9bf9394122</td>
+                <td>0</td>
+                <td>247e62755c65188f</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

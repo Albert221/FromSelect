@@ -1,0 +1,28 @@
+@mixin button($background) {
+    border: 1px solid darken($background, 15%);
+    border-radius: 3px;
+    padding: 7px 15px;
+    background: $background;
+    background: linear-gradient(to bottom, $background, darken($background, 10%));
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+    text-align: center;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, .3);
+    cursor: pointer;
+
+    &:hover, &:focus {
+        background: lighten($background, 10%);
+        background: linear-gradient(to bottom, lighten($background, 10%), $background);
+    }
+
+    &:focus {
+        outline: 0;
+    }
+
+    &:active {
+        background: lighten($background, 10%);
+        box-shadow: 0 3px 3px rgba(0, 0, 0, .3),
+                    inset 0 0 15px rgba(0, 0, 0, .3);
+    }
+}

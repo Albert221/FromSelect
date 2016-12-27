@@ -1,0 +1,26 @@
+.main-table {
+    border-collapse: collapse;
+    white-space: nowrap;
+
+    th {
+        border-bottom: 1px solid #ccc;
+        padding: 15px;
+        text-align: left;
+    }
+
+    tbody {
+        tr {
+            &:nth-child(even) {
+                background: $mainTableEvenBackground;
+            }
+
+            td {
+                padding: 15px;
+
+                @at-root .main-table.compact tbody tr td {
+                    padding: 5px 15px;
+                }
+            }
+        }
+    }
+}

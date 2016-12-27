@@ -1,0 +1,49 @@
+*, :before, :after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+body {
+    color: #333;
+    font: 14px $fontFamily;
+}
+
+input, textarea {
+    font: inherit;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: $sidebarWidth;
+}
+
+.main {
+    margin-left: $sidebarWidth;
+}
+
+a {
+    color: #03a9f4;
+    text-decoration: underline;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.columns {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: baseline;
+
+    > * {
+        flex: 1 100%;
+    }
+}

@@ -1,0 +1,21 @@
+.header {
+    order: 2;
+    padding: 15px;
+
+    h1 {
+        text-align: center;
+    }
+
+    nav {
+        h2 {
+            @extend %hidden;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-around;
+        }
+    }
+}

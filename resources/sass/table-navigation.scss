@@ -1,0 +1,29 @@
+.table-navigation {
+    background: $tableNavigationBackground;
+
+    h2 {
+        @extend %hidden;
+    }
+
+    ul {
+        display: flex;
+        flex-flow: row wrap;
+        list-style: none;
+
+        a {
+            display: block;
+            padding: 15px;
+            color: #fff;
+            font-weight: bold;
+            text-decoration: none;
+
+            &:hover, &:focus {
+                background: lighten($tableNavigationBackground, 10%);
+            }
+        }
+
+        .current a {
+            background: lighten($tableNavigationBackground, 15%);
+        }
+    }
+}

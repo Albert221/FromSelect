@@ -1,0 +1,14 @@
+.actions {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 15px;
+
+    span {
+        margin-right: 5px;
+    }
+
+    [type="submit"] {
+        @include button($red);
+        padding: 5px 10px;
+    }
+}
