@@ -1,0 +1,31 @@
+{% extends '@fromselect/layout.twig' %}
+
+{% block main %}
+    <div class="content">
+        <pre class="query"><code><span class="query-keyword">SHOW TABLES IN</span> `{{ current.database }}`</code></pre>
+        <form action="#" method="post" class="actions" id="actions">
+            <span>Selected:</span>
+            <input type="submit" value="Delete">
+        </form>
+        <table class="main-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th><a href="#">Table</a></th>
+                    <th><a href="#">Engine</a></th>
+                    <th><a href="#">Collation</a></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tableName, table in tables %}
+                    <tr>
+                        <td><input type="checkbox" name="row[]" value="{{ tableName }}" form="actions"></td>
+                        <td>{{ tableName }}</td>
+                        <td>{{ table.engine }}</td>
+                        <td>{{ table.collation }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

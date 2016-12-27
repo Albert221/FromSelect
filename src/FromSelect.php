@@ -5,6 +5,7 @@ namespace FromSelect;
 use FromSelect\Controller\ControllerDecorator;
 use FromSelect\Controller\TestController;
 use FromSelect\Repository\ArrayDatabaseRepository;
+use FromSelect\ServiceProvider\FromFileServiceProvider;
 use FromSelect\ServiceProvider\RouteServiceProvider;
 use FromSelect\ServiceProvider\ServiceProviderInterface;
 use FromSelect\ServiceProvider\TwigServiceProvider;
@@ -48,16 +49,13 @@ class FromSelect extends App
 
         $this->serviceProviders[] = new TwigServiceProvider();
         $this->serviceProviders[] = new RouteServiceProvider();
+        $this->serviceProviders[] = new FromFileServiceProvider();
 
         // @TODO: Separate this to a service provider
         $container['callableResolver'] = function ($c) {
             $decorator = new ControllerDecorator($c['view'], $c['router']);
 
             return new DecoratingCallableResolver($c, $decorator);
-        };
-
-        $container[TestController::class] = function () {
-            return new TestController(new ArrayDatabaseRepository());
         };
     }
 
@@ -67,6 +65,14 @@ class FromSelect extends App
     protected function provideServices()
     {
         foreach ($this->serviceProviders as $serviceProvider) {
+            if (! $serviceProvider instanceof ServiceProviderInterface) {
+                throw new \RuntimeException(sprintf(
+                    '%s must implement %s',
+                    get_class($serviceProvider),
+                    ServiceProviderInterface::class
+                ));
+            }
+
             $serviceProvider->provide($this);
         }
     }

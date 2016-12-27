@@ -11,7 +11,7 @@ use Slim\Interfaces\CallableResolverInterface;
 class DecoratingCallableResolver implements CallableResolverInterface
 {
     /**
-     * @var DecoratingCallableResolver
+     * @var CallableResolver
      */
     private $callableResolver;
 
@@ -45,8 +45,11 @@ class DecoratingCallableResolver implements CallableResolverInterface
     {
         $resolved = $this->callableResolver->resolve($toResolve);
 
-        if ($resolved instanceof AbstractController) {
-            $this->controllerDecorator->decorate($resolved);
+        // Check against resolved value for callable class or against first
+        // value for callable array.
+        if (($controller = $resolved) instanceof AbstractController
+            || ($controller = $resolved[0]) instanceof AbstractController) {
+            $this->controllerDecorator->decorate($controller);
         }
 
         return $resolved;

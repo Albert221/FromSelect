@@ -28,5 +28,9 @@ abstract class AbstractController
     {
         $this->twig = $twig;
         $this->router = $router;
+
+        if (method_exists($this, 'postConstructor')) {
+            $this->postConstructor();
+        }
     }
 }

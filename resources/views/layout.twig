@@ -27,7 +27,7 @@
                 </form>
                 <h2>Databases</h2>
                 <ul class="list">
-                    {% for database, tables in databases %}
+                    {% for database, tables in databaseTree %}
                         <li {{ current.database == database ? 'class="active"' : '' }}>
                             <a href="#">{{ database }}</a>
                             <ul>

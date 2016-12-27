@@ -28,7 +28,7 @@ class TestController extends AbstractController
         $databases = $this->databaseRepository->getTree();
 
         return $this->twig->render($response, '@fromselect/results.twig', [
-            'databases' => $databases,
+            'databaseTree' => $databases,
             'current' => [
                 'database' => 'information_schema',
                 'table' => null

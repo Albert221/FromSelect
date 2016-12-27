@@ -14,6 +14,6 @@ class RouteServiceProvider implements ServiceProviderInterface
      */
     public function provide(FromSelect $app)
     {
-        $app->any('/', TestController::class);
+        require dirname(dirname(__DIR__)).'/resources/routes.php';
     }
 }
