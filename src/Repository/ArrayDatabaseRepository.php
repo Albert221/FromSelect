@@ -150,9 +150,7 @@ class ArrayDatabaseRepository implements DatabaseRepository
             'users',
             'user_logs'
         ],
-        'test' => [
-            ''
-        ]
+        'test' => []
     ];
 
     /**

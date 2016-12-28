@@ -4,7 +4,6 @@
         top: 50px;
         left: 0;
         right: 0;
-        margin-bottom: 15px;
 
         label {
             @extend %hidden;
@@ -27,12 +26,18 @@
 
     .list {
         position: absolute;
-        top: 100px;
+        top: 85px;
         bottom: 0;
         left: 0;
         right: 0;
         list-style: none;
         overflow-x: hidden;
+
+        .new a {
+            @include button($primaryColor);
+            display: block;
+            margin: 15px;
+        }
 
         > li {
             > a {
