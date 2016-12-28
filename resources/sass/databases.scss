@@ -1,13 +1,9 @@
 .databases {
-    order: 1;
-
-    .new {
-        @include button($primaryColor);
-        display: block;
-        margin: 15px;
-    }
-
     .search {
+        position: absolute;
+        top: 50px;
+        left: 0;
+        right: 0;
         margin-bottom: 15px;
 
         label {
@@ -15,6 +11,7 @@
         }
 
         [type="search"] {
+            height: 35px;
             width: 100%;
             border: 0;
             padding: 10px 15px;
@@ -29,7 +26,11 @@
     }
 
     .list {
-        max-height: calc(100vh - 196px);
+        position: absolute;
+        top: 100px;
+        bottom: 0;
+        left: 0;
+        right: 0;
         list-style: none;
         overflow-x: hidden;
 
