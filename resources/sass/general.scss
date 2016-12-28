@@ -10,7 +10,8 @@ html {
 
 body {
     color: #333;
-    font: 14px $fontFamily;
+    font-family: $fontFamily;
+    font-size: 14px;
 }
 
 input, textarea {
