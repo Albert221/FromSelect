@@ -12,7 +12,7 @@ interface DatabaseRepository
     public function getTree();
 
     /**
-     * Returns an array of table's objects in the specified database.
+     * Returns an array with: 1. an array of Table objects 2. query 3. execution time.
      *
      * @param $name string Database name
      * @return array

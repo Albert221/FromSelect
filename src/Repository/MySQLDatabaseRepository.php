@@ -65,6 +65,8 @@ class MySQLDatabaseRepository implements DatabaseRepository
      */
     public function getTablesByDatabase($name)
     {
+        $start = microtime();
+
         $statement = $this->pdo->prepare('
             SELECT
               `TABLE_NAME`,
@@ -81,10 +83,12 @@ class MySQLDatabaseRepository implements DatabaseRepository
         $statement->bindValue(':database', $name);
         $statement->execute();
 
+        $executionTime = microtime() - $start;
+
         $results = $statement->fetchAll();
 
         $this->tableMapper->mapResults($results, Table::MAP);
 
-        return $results;
+        return [$results, $statement->queryString, $executionTime];
     }
 }

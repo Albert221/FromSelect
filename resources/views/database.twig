@@ -9,7 +9,13 @@
         </ul>
     </nav>
     <div class="content">
-        <pre class="query"><code><span class="query-keyword">SHOW TABLES IN</span> `{{ current.database }}`</code></pre>
+        <div class="query">
+            <code>{{ query|highlight('mysql')|raw }}</code>
+            <ul>
+                <li>{{ (executionTime * 1000)|round(3) }}ms</li>
+                <li><a href="#">EXPLAIN</a></li>
+            </ul>
+        </div>
         <form action="#" method="post" class="actions" id="actions">
             <span>Selected:</span>
             <input type="submit" value="Delete">

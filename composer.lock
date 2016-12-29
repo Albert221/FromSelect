@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5c7bd382a91bb90fe6eeedb989dda5b2",
-    "content-hash": "a0a823ff96a8b96a1eff80aff3063a1e",
+    "hash": "75a3ec1a62fb0a326fe57e16ae59b558",
+    "content-hash": "335850a0f51b08f76bc56bf9d6f15caf",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -33,6 +33,55 @@
             ],
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "time": "2014-12-30 15:22:37"
+        },
+        {
+            "name": "kadet/keylighter",
+            "version": "v0.8.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kadet1090/KeyLighter.git",
+                "reference": "0d2e6e4e542c282c22c66567174554ad67d047be"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kadet1090/KeyLighter/zipball/0d2e6e4e542c282c22c66567174554ad67d047be",
+                "reference": "0d2e6e4e542c282c22c66567174554ad67d047be",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.8.*",
+                "symfony/console": "^2.8|^3.0"
+            },
+            "suggest": {
+                "symfony/console": "Allows usage of keylighters CLI utility."
+            },
+            "bin": [
+                "bin/keylighter"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Kadet\\Highlighter\\": "."
+                },
+                "files": [
+                    "./functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kacper Donat",
+                    "email": "contact@kadet.net"
+                }
+            ],
+            "description": "Yet another syntax highlighter for PHP",
+            "time": "2016-09-16 21:34:34"
         },
         {
             "name": "nikic/fast-route",

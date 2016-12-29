@@ -3,7 +3,6 @@
 namespace FromSelect\Controller;
 
 use FromSelect\Repository\DatabaseRepository;
-use FromSelect\Repository\Exception\DatabaseNotFoundException;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
@@ -42,17 +41,15 @@ class DatabaseController extends AbstractController
     {
         $database = $request->getAttribute('database');
 
-        try {
-            $tables = $this->databaseRepository->getTablesByDatabase($database);
-        } catch (DatabaseNotFoundException $e) {
-            return $response->withStatus(404);
-        }
+        list($tables, $query, $executionTime) = $this->databaseRepository->getTablesByDatabase($database);
 
         return $this->twig->render($response, '@fromselect/database.twig', [
             'current' => [
                 'database' => $database
             ],
-            'tables' => $tables
+            'tables' => $tables,
+            'query' => $query,
+            'executionTime' => $executionTime
         ]);
     }
 }

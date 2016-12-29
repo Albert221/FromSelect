@@ -15,7 +15,8 @@
     "require": {
         "php": ">=5.6",
         "slim/slim": "^3.7",
-        "slim/twig-view": "^2.1"
+        "slim/twig-view": "^2.1",
+        "kadet/keylighter": "^0.8.2"
     },
     "autoload": {
         "psr-4": {
