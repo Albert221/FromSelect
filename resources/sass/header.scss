@@ -1,21 +1,20 @@
 .header {
-    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 50px;
 
     h1 a {
-        color: #fff;
         display: block;
-        margin-left: -15px; // Make header actually centered
-        margin-top: -8px;
-        text-align: center;
+        color: #fff;
         text-decoration: none;
 
         span {
-            color: #03a9f4;
+            color: $primaryColor;
         }
 
         &:hover, &:focus {
-            color: #03a9f4;
+            color: $primaryColor;
         }
     }
 }
