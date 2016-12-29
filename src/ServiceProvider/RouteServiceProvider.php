@@ -2,7 +2,6 @@
 
 namespace FromSelect\ServiceProvider;
 
-use FromSelect\Controller\TestController;
 use FromSelect\FromSelect;
 
 class RouteServiceProvider implements ServiceProviderInterface

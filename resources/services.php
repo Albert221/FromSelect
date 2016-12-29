@@ -4,12 +4,16 @@
 
 use FromSelect\Controller\DatabaseController;
 use FromSelect\Controller\TestController;
-use FromSelect\Repository\ArrayDatabaseRepository;
+use FromSelect\Repository\DatabaseRepository;
 
-$container[TestController::class] = function () {
-    return new TestController(new ArrayDatabaseRepository());
+$container[DatabaseRepository::class] = function ($c) {
+    return new \FromSelect\Repository\MySQLDatabaseRepository($c['pdo']);
 };
 
-$container[DatabaseController::class] = function () {
-    return new DatabaseController(new ArrayDatabaseRepository());
+$container[TestController::class] = function ($c) {
+    return new TestController($c[DatabaseRepository::class]);
+};
+
+$container[DatabaseController::class] = function ($c) {
+    return new DatabaseController($c[DatabaseRepository::class]);
 };

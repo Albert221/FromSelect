@@ -9,7 +9,7 @@ interface ServiceProviderInterface
     /**
      * Provide services
      *
-     * @param FromSelect $fromSelect
+     * @param FromSelect $app
      */
-    public function provide(FromSelect $fromSelect);
+    public function provide(FromSelect $app);
 }

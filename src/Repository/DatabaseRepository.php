@@ -2,8 +2,6 @@
 
 namespace FromSelect\Repository;
 
-use FromSelect\Repository\Exception\DatabaseNotFoundException;
-
 interface DatabaseRepository
 {
     /**
@@ -18,7 +16,6 @@ interface DatabaseRepository
      *
      * @param $name string Database name
      * @return array
-     * @throws DatabaseNotFoundException when database with specified name does not exists.
      */
-    public function getTablesInDatabase($name);
+    public function getTablesByDatabase($name);
 }

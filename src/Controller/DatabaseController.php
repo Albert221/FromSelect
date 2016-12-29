@@ -43,7 +43,7 @@ class DatabaseController extends AbstractController
         $database = $request->getAttribute('database');
 
         try {
-            $tables = $this->databaseRepository->getTablesInDatabase($database);
+            $tables = $this->databaseRepository->getTablesByDatabase($database);
         } catch (DatabaseNotFoundException $e) {
             return $response->withStatus(404);
         }

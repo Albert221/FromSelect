@@ -13,15 +13,17 @@
                     <th></th>
                     <th><a href="#">Table</a></th>
                     <th><a href="#">Engine</a></th>
+                    <th><a href="#">Row count</a></th>
                     <th><a href="#">Collation</a></th>
                 </tr>
             </thead>
             <tbody>
-                {% for tableName, table in tables %}
+                {% for table in tables %}
                     <tr>
-                        <td><input type="checkbox" name="row[]" value="{{ tableName }}" form="actions"></td>
-                        <td>{{ tableName }}</td>
+                        <td><input type="checkbox" name="row[]" value="{{ table.name }}" form="actions"></td>
+                        <td>{{ table.name }}</td>
                         <td>{{ table.engine }}</td>
+                        <td>{{ table.rowCount|default(0) }}</td>
                         <td>{{ table.collation }}</td>
                     </tr>
                 {% endfor %}
