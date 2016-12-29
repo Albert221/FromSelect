@@ -12,7 +12,7 @@
         <div class="query">
             <code>{{ query|highlight('mysql')|raw }}</code>
             <ul>
-                <li>{{ (executionTime * 1000)|round(3) }}ms</li>
+                <li title="Query execution time">{{ (executionTime * 1000)|round(3) }}ms</li>
                 <li><a href="#">EXPLAIN</a></li>
             </ul>
         </div>
