@@ -1,8 +1,8 @@
 {% extends '@fromselect/layout.twig' %}
 
 {% block main %}
-    <nav class="table-navigation">
-        <h2>Table navigation</h2>
+    <nav class="navbar">
+        <h2>Database navigation</h2>
         <ul>
             <li class="current"><a href="{{ path_for('database.show', {'database': current.database}) }}">Tables</a></li>
             <li><a href="#">Operations</a></li>
