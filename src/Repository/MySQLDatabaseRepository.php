@@ -89,6 +89,10 @@ class MySQLDatabaseRepository implements DatabaseRepository
 
         $this->tableMapper->mapResults($results, Table::MAP);
 
-        return [$results, $statement->queryString, $executionTime];
+        // Access information_schema directly but return easier to understand
+        // query to be shown in the query box.
+        $query = "SHOW TABLES IN `$name`";
+
+        return [$results, $query, $executionTime];
     }
 }
