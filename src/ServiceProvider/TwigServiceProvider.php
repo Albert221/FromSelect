@@ -4,7 +4,7 @@ namespace FromSelect\ServiceProvider;
 
 use FromSelect\FromSelect;
 use FromSelect\Twig\KeyLighterExtension;
-use Psr\Http\Message\RequestInterface;
+use Slim\Http\Request;
 use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
 
@@ -26,7 +26,7 @@ class TwigServiceProvider implements ServiceProviderInterface
                 'debug' => $app->debug
             ]);
 
-            /** @var RequestInterface $request */
+            /** @var Request $request */
             $request = $c['request'];
             $twig->addExtension(new TwigExtension($c['router'], $request->getUri()));
             $twig->addExtension(new KeyLighterExtension());

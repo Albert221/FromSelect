@@ -1,5 +1,7 @@
 {% extends '@fromselect/layout.twig' %}
 
+{% import '@fromselect/parts/macros.twig' as macros %}
+
 {% block main %}
     <nav class="navbar">
         <h2>Database navigation</h2>
@@ -9,13 +11,7 @@
         </ul>
     </nav>
     <div class="content">
-        <div class="query">
-            <code>{{ query|highlight('mysql')|raw }}</code>
-            <ul>
-                <li title="Query execution time">{{ (executionTime * 1000)|round(3) }}ms</li>
-                <li><a href="#">EXPLAIN</a></li>
-            </ul>
-        </div>
+        {{ macros.query(query.query, query.executionTime, '#') }}
         <form action="#" method="post" class="actions" id="actions">
             <span>Selected:</span>
             <input type="submit" value="Delete">

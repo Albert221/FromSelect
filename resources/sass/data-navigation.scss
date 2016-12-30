@@ -13,6 +13,7 @@
     .pages {
         display: flex;
         flex-flow: row wrap;
+        align-items: baseline;
         list-style: none;
 
         :not(.current) a {
@@ -23,25 +24,19 @@
 
         .current a {
             margin-right: 1px;
+            display: block;
             padding: 6px 8px;
             color: #333;
             text-decoration: none;
         }
     }
 
-    .jump {
+    label {
         margin-left: 14px;
-        margin-right: 15px;
-
-        select {
-            padding: 7px 0 7px 7px;
-        }
     }
 
-    .per-page {
-        [type="number"] {
-            width: 75px;
-            padding: 7px 0 7px 7px;
-        }
+    [type="number"] {
+        width: 75px;
+        padding: 7px 0 7px 7px;
     }
 }

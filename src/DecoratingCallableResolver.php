@@ -48,7 +48,7 @@ class DecoratingCallableResolver implements CallableResolverInterface
         // Check against resolved value for callable class or against first
         // value for callable array.
         if (($controller = $resolved) instanceof AbstractController
-            || ($controller = $resolved[0]) instanceof AbstractController) {
+            || is_array($controller) && ($controller = $resolved[0]) instanceof AbstractController) {
             $this->controllerDecorator->decorate($controller);
         }
 

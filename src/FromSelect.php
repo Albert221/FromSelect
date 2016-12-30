@@ -9,6 +9,10 @@ use FromSelect\ServiceProvider\RouteServiceProvider;
 use FromSelect\ServiceProvider\ServiceProviderInterface;
 use FromSelect\ServiceProvider\TwigServiceProvider;
 use Slim\App;
+use Slim\Http\Request;
+use Slim\Http\Response;
+use Slim\Route;
+use Slim\Views\Twig;
 
 class FromSelect extends App
 {
@@ -31,12 +35,27 @@ class FromSelect extends App
     {
         parent::__construct([
             'settings' => [
-                'displayErrorDetails' => $this->debug = $debug
+                'displayErrorDetails' => $this->debug = $debug,
+                'determineRouteBeforeAppMiddleware' => true
             ]
         ]);
 
         $this->registerServices();
         $this->provideServices();
+
+        // @TODO: Move this to somewhere where it should be
+        $this->add(function (Request $request, Response $response, callable $next) {
+            /** @var Route $route */
+            $route = $request->getAttribute('route');
+
+            /** @var Twig $twig */
+            $twig = $this['view'];
+
+            $twig->getEnvironment()->addGlobal('route', $route);
+            $twig->getEnvironment()->addGlobal('queryParams', $request->getQueryParams());
+
+            return $next($request, $response);
+        });
     }
 
     /**

@@ -1,5 +1,7 @@
 {% extends '@fromselect/layout.twig' %}
 
+{% import '@fromselect/parts/macros.twig' as macros %}
+
 {% block main %}
     <nav class="navbar">
         <h2>Table navigation</h2>
@@ -10,30 +12,9 @@
         </ul>
     </nav>
     <div class="content">
-        <pre class="query"><code><span class="query-keyword">SELECT</span> * <span class="query-keyword">FROM</span> `users` <span class="query-keyword">LIMIT</span> <span class="query-numeric">0</span>, <span class="query-numeric">25</span></code></pre>
+        {{ macros.query('SELECT * FROM `users` LIMIT 0, 25', 0.001462, '#') }}
         <div class="columns">
-            <nav class="data-navigation">
-                <h2>Navigation</h2>
-                <ul class="pages">
-                    <li class="current"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">Next ></a></li>
-                    <li><a href="#">Last >></a></li>
-                </ul>
-                <form action="#" method="get" class="jump">
-                    <label for="jump">Jump to:</label>
-                    <select name="jump" id="jump" required>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </form>
-                <form action="#" method="get" class="per-page">
-                    <label for="perPage">Rows per page:</label>
-                    <input type="number" name="perPage" id="perPage" value="25" step="25" min="1" required>
-                </form>
-            </nav>
+            {{ macros.dataNavigation(2, 25, 178) }}
             <form action="#" method="post" class="actions" id="actions">
                 <span>Selected:</span>
                 <input type="submit" value="Delete">

@@ -20,11 +20,11 @@
                 <ul class="list">
                     <li class="new"><a href="#">Add new database</a></li>
                     {% for database, tables in databaseTree %}
-                        <li {{ current.database == database ? 'class="active"' : '' }}>
+                        <li {{ current.database == database ? 'class="active"' }}>
                             <a href="{{ path_for('database.show', {'database': database}) }}">{{ database }}</a>
                             <ul>
                                 {% for table in tables %}
-                                    <li {{ current.table == table ? 'class="active"' : '' }}><a href="#">{{ table }}</a></li>
+                                    <li {{ current.table == table ? 'class="active"' }}><a href="#">{{ table }}</a></li>
                                 {% endfor %}
                             </ul>
                         </li>

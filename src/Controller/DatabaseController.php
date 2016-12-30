@@ -24,6 +24,9 @@ class DatabaseController extends AbstractController
         $this->databaseRepository = $databaseRepository;
     }
 
+    /**
+     * Post constructor provides database tree for Twig.
+     */
     protected function postConstructor()
     {
         $this->twig->getEnvironment()->addGlobal('databaseTree',
@@ -48,8 +51,10 @@ class DatabaseController extends AbstractController
                 'database' => $database
             ],
             'tables' => $tables,
-            'query' => $query,
-            'executionTime' => $executionTime
+            'query' => [
+                'query' => $query,
+                'executionTime' => $executionTime
+            ]
         ]);
     }
 }

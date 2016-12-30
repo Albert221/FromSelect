@@ -1,0 +1,37 @@
+{% macro query(query, executionTime, describeUrl) %}
+    <div class="query">
+        <code>{{ query|highlight('mysql')|raw }}</code>
+        <ul>
+            <li title="Query execution time">{{ (executionTime * 1000)|round(3) }}ms</li>
+            <li><a href={{ describeUrl }}>EXPLAIN</a></li>
+        </ul>
+    </div>
+{% endmacro %}
+
+{% macro dataNavigation(current, perPage, count) %}
+    {% set pages = (count / perPage)|round(0, 'ceil') %}
+    <nav class="data-navigation">
+        <h2>Navigation</h2>
+        <ul class="pages">
+            {% if i > 1 %}
+                <li><a href="{{ path_for(route.name, route.arguments, queryParams|merge({'page': 1})) }}"><< First</a></li>
+                <li><a href="{{ path_for(route.name, route.arguments, queryParams|merge({'page': current - 1})) }}">< Previous</a></li>
+            {% endif %}
+            {% for i in (current - 3)..(current + 3) if i >= 1 and i <= pages %}
+                <li {{ i == current ? 'class="current"' }}>
+                    <a href="{{ path_for(route.name, route.arguments, queryParams|merge({'page': i})) }}">{{ i }}</a>
+                </li>
+            {% endfor %}
+            {% if i < pages %}
+                <li><a href="{{ path_for(route.name, route.arguments, queryParams|merge({'page': current + 1})) }}">Next ></a></li>
+                <li><a href="{{ path_for(route.name, route.arguments, queryParams|merge({'page': pages})) }}">Last >></a></li>
+            {% endif %}
+        </ul>
+        <form action="{{ path_for(route.name, route.arguments, queryParams) }}" method="get">
+            <label for="jump">Jump to:</label>
+            <input type="number" name="page" id="jump" value="{{ current }}" min="1" max="pages" required>
+            <label for="perPage">Rows per page:</label>
+            <input type="number" name="perPage" id="perPage" value="{{ perPage }}" step="25" min="1" required>
+        </form>
+    </nav>
+{% endmacro %}
