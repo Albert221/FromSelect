@@ -44,17 +44,13 @@ class DatabaseController extends AbstractController
     {
         $database = $request->getAttribute('database');
 
-        list($tables, $query, $executionTime) = $this->databaseRepository->getTablesByDatabase($database);
+        $tables = $this->databaseRepository->getTablesByDatabase($database);
 
         return $this->twig->render($response, '@fromselect/database.twig', [
             'current' => [
                 'database' => $database
             ],
             'tables' => $tables,
-            'query' => [
-                'query' => $query,
-                'executionTime' => $executionTime
-            ]
         ]);
     }
 }
