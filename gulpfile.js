@@ -3,6 +3,8 @@ const gulp = require('gulp'),
       autoprefixer = require('gulp-autoprefixer'),
       csso = require('gulp-csso');
 
+gulp.task('default', ['sass', 'js']);
+
 gulp.task('sass', () => {
     return gulp.src('./resources/sass/style.scss')
                .pipe(sass().on('error', sass.logError))
@@ -13,4 +15,9 @@ gulp.task('sass', () => {
 
 gulp.task('sass:watch', () => {
     gulp.watch('./resources/sass/**/*.scss', ['sass']);
+});
+
+gulp.task('js', () => {
+    return gulp.src('./resources/js/**/*.js')
+        .pipe(gulp.dest('./public/assets'));
 });
