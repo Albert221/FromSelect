@@ -25,16 +25,7 @@ class DatabaseController extends AbstractController
     }
 
     /**
-     * Post constructor provides database tree for Twig.
-     */
-    protected function postConstructor()
-    {
-        $this->twig->getEnvironment()->addGlobal('databaseTree',
-            $this->databaseRepository->getTree());
-    }
-
-    /**
-     * database.show: GET /database/{database}
+     * database.show: GET /{database}
      *
      * @param Request $request
      * @param Response $response
@@ -47,10 +38,10 @@ class DatabaseController extends AbstractController
         $tables = $this->databaseRepository->getTablesByDatabase($database);
 
         return $this->twig->render($response, '@fromselect/database.twig', [
+            'tables' => $tables,
             'current' => [
                 'database' => $database
             ],
-            'tables' => $tables,
         ]);
     }
 }

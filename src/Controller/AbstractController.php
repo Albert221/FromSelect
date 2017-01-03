@@ -21,6 +21,7 @@ abstract class AbstractController
      * Pseudo constructor because the proper constructor is for child class
      * specific dependencies.
      *
+     * @internal To be called only by callable resolver.
      * @param Twig $twig
      * @param RouterInterface $router
      */
@@ -28,9 +29,5 @@ abstract class AbstractController
     {
         $this->twig = $twig;
         $this->router = $router;
-
-        if (method_exists($this, 'postConstructor')) {
-            $this->postConstructor();
-        }
     }
 }

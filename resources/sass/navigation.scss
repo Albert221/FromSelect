@@ -93,9 +93,17 @@
 
             ul {
                 display: none;
+
+                a {
+                    display: block;
+                    padding: 5px 15px 5px 29px;
+                    background: lighten($sidebarBackground, 20%);
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                }
             }
 
-            // For expanded database
+            // For expanded database.
             &.active {
                 > a {
                     background: linear-gradient(to bottom,
@@ -105,31 +113,26 @@
 
                 ul {
                     display: block;
-
-                    a {
-                        display: block;
-                        padding: 5px 15px 5px 29px;
-                        background: lighten($sidebarBackground, 20%);
-                        text-overflow: ellipsis;
-                        overflow: hidden;
-                    }
-
-                    &.current a {
-                        background: lighten($sidebarBackground, 15%);
-                        text-decoration: none;
-                    }
                 }
             }
 
-            // For currently browsed database/table
-            &.current > a {
-                color: #fff;
-                background: linear-gradient(to bottom,
-                                lighten($primaryColor, 15%),
-                                $primaryColor);
-                text-decoration: none;
-                text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
-                font-weight: bold;
+            // For currently browsed database.
+            &.current {
+                > a {
+                    color: #fff;
+                    background: linear-gradient(to bottom,
+                            lighten($primaryColor, 15%),
+                            $primaryColor);
+                    text-decoration: none;
+                    text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+                    font-weight: bold;
+                }
+
+                // For currently browsed table.
+                .current a {
+                    background: lighten($sidebarBackground, 15%);
+                    text-decoration: none;
+                }
             }
         }
     }

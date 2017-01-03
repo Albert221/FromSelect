@@ -30,7 +30,7 @@ class TestController extends AbstractController
         return $this->twig->render($response, '@fromselect/results.twig', [
             'databaseTree' => $databases,
             'current' => [
-                'database' => 'information_schema',
+                'database' => null,
                 'table' => null
             ]
         ]);

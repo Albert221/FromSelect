@@ -8,30 +8,38 @@
     </div>
 {% endmacro %}
 
-{% macro dataNavigation(current, perPage, count) %}
-    {% set pages = (count / perPage)|round(0, 'ceil') %}
+{% macro dataNavigation(pagination) %}
     <nav class="data-navigation">
         <h2>Navigation</h2>
         <ul class="pages">
-            {% if i > 1 %}
+            {% if pagination.currentPage > 1 %}
                 <li><a href="{{ path_for(route.name, route.arguments, queryParams|merge({'page': 1})) }}"><< First</a></li>
-                <li><a href="{{ path_for(route.name, route.arguments, queryParams|merge({'page': current - 1})) }}">< Previous</a></li>
+                <li><a href="{{ path_for(route.name, route.arguments, queryParams|merge({'page': pagination.currentPage - 1})) }}">< Previous</a></li>
+                {% for i in 1..3 if i + 3 < pagination.currentPage %}
+                    <li><a href="{{ path_for(route.name, route.arguments, queryParams|merge({'page': i})) }}">{{ i }}</a></li>
+                {% endfor %}
+                <li class="dots">...</li>
             {% endif %}
-            {% for i in (current - 3)..(current + 3) if i >= 1 and i <= pages %}
-                <li {{ i == current ? 'class="current"' }}>
+            {% for i in (pagination.currentPage - 3)..(pagination.currentPage + 3) if i >= 1 and i <= pagination.pagesCount %}
+                <li {{ i == pagination.currentPage ? 'class="current"' }}>
                     <a href="{{ path_for(route.name, route.arguments, queryParams|merge({'page': i})) }}">{{ i }}</a>
                 </li>
             {% endfor %}
-            {% if i < pages %}
-                <li><a href="{{ path_for(route.name, route.arguments, queryParams|merge({'page': current + 1})) }}">Next ></a></li>
-                <li><a href="{{ path_for(route.name, route.arguments, queryParams|merge({'page': pages})) }}">Last >></a></li>
+            {% if pagination.currentPage < pagination.pagesCount %}
+                <li class="dots">...</li>
+                {% for i in (pagination.pagesCount - 2)..pagination.pagesCount if i - 3 > pagination.currentPage %}
+                    <li><a href="{{ path_for(route.name, route.arguments, queryParams|merge({'page': i})) }}">{{ i }}</a></li>
+                {% endfor %}
+                <li><a href="{{ path_for(route.name, route.arguments, queryParams|merge({'page': pagination.currentPage + 1})) }}">Next ></a></li>
+                <li><a href="{{ path_for(route.name, route.arguments, queryParams|merge({'page': pagination.pagesCount})) }}">Last >></a></li>
             {% endif %}
         </ul>
         <form action="{{ path_for(route.name, route.arguments, queryParams) }}" method="get">
             <label for="jump">Jump to:</label>
-            <input type="number" name="page" id="jump" value="{{ current }}" min="1" max="pages" required>
+            <input type="number" name="page" id="jump" value="{{ pagination.currentPage }}" min="1" max="{{ pagination.pagesCount }}" required>
             <label for="perPage">Rows per page:</label>
-            <input type="number" name="perPage" id="perPage" value="{{ perPage }}" step="25" min="1" required>
+            <input type="number" name="perPage" id="perPage" value="{{ pagination.perPage }}" min="1" required>
+            <input type="submit" value="Przejdź">
         </form>
     </nav>
 {% endmacro %}

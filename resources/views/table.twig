@@ -1,0 +1,45 @@
+{% extends '@fromselect/layout.twig' %}
+
+{% import '@fromselect/parts/macros.twig' as macros %}
+
+{% block main %}
+    <nav class="navbar">
+        <h2>Table navigation</h2>
+        <ul>
+            <li class="current"><a href="{{ path_for('table.show', {'database': current.database, 'table': current.table}) }}">Tables</a></li>
+            <li><a href="#">Operations</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        {{ macros.query(query.query, query.executionTime, '#') }}
+        <div class="columns">
+            {{ macros.dataNavigation(pagination) }}
+            <form action="#" method="post" class="actions" id="actions">
+                <span>Selected:</span>
+                <input type="submit" value="Delete">
+            </form>
+        </div>
+        <table class="main-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    {% for column in data[0]|keys %}
+                        <th><a href="{{ path_for(route.name, route.arguments, queryParams|merge({'sort': column})) }}">{{ column }}</a></th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                    <tr>
+                        <td><input type="checkbox" name="row[]" value="lol" form="actions"></td>
+                        {% for column in row %}
+                            <td>{{ column }}</td>
+                        {% endfor %}
+                    </tr>
+                {% else %}
+                    <tr><td>No rows found.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

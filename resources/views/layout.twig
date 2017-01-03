@@ -27,7 +27,9 @@
                             </a>
                             <ul>
                                 {% for table in tables %}
-                                    <li {{ current.table == table ? 'class="current"' }}><a href="#">{{ table }}</a></li>
+                                    <li {{ current.table == table ? 'class="current"' }}>
+                                        <a href="{{ path_for('table.show', {'database': database, 'table': table}) }}">{{ table }}</a>
+                                    </li>
                                 {% endfor %}
                             </ul>
                         </li>

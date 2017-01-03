@@ -29,7 +29,7 @@
                 {% for table in tables %}
                     <tr>
                         <td><input type="checkbox" name="row[]" value="{{ table.name }}" form="actions"></td>
-                        <td>{{ table.name }}</td>
+                        <td><a href="{{ path_for('table.show', {'database': current.database, 'table': table.name}) }}">{{ table.name }}</a></td>
                         <td>{{ table.engine }}</td>
                         <td>{{ table.rowCount|default(0) }}</td>
                         <td>{{ table.collation }}</td>
