@@ -24,8 +24,10 @@
                 <tr>
                     <th></th>
                     {% for column in data[0]|keys %}
-                        {% set order = {'order': queryParams.sort == column ? (not queryParams.order ?: null) : null} %}
-                        <th><a href="{{ path_for(route.name, route.arguments, queryParams|merge({'sort': column})|merge(order)) }}">{{ column }}</a></th>
+                        {% set order = {'order': column == queryParams.sort ? (not queryParams.order ?: null) : null} %}
+                        <th {{ column == queryParams.sort ? 'class="current"' }}>
+                            <a href="{{ path_for(route.name, route.arguments, queryParams|merge({'sort': column})|merge(order)) }}">{{ column }}</a>
+                        </th>
                     {% endfor %}
                 </tr>
             </thead>
@@ -49,7 +51,9 @@
                     <th></th>
                     {% for column in data[0]|keys %}
                         {% set order = {'order': queryParams.sort == column ? (not queryParams.order ?: null) : null} %}
-                        <th><a href="{{ path_for(route.name, route.arguments, queryParams|merge({'sort': column})|merge(order)) }}">{{ column }}</a></th>
+                        <th {{ column == queryParams.sort ? 'class="current"' }}>
+                            <a href="{{ path_for(route.name, route.arguments, queryParams|merge({'sort': column})|merge(order)) }}">{{ column }}</a>
+                        </th>
                     {% endfor %}
                 </tr>
             </tfoot>
