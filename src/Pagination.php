@@ -102,6 +102,16 @@ class Pagination
     }
 
     /**
+     * Sets count of all rows.
+     *
+     * @param int $count
+     */
+    public function setCount($count)
+    {
+        $this->count = $count;
+    }
+
+    /**
      * Returns pages count.
      *
      * @return int

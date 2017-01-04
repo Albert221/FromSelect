@@ -15,7 +15,8 @@ class MySQLTableRepository implements TableRepository
     }
 
     /**
-     * Returns an array of paginated rows array, query and execution time of query.
+     * Returns an array of paginated rows array, query and execution time
+     * of query and sets the count of rows in a pagination object.
      *
      * @param $database
      * @param $table
@@ -23,7 +24,7 @@ class MySQLTableRepository implements TableRepository
      *
      * @return array [rows, query, executionTime]
      */
-    public function paginatedData($database, $table, Pagination $pagination)
+    public function paginatedData($database, $table, Pagination &$pagination)
     {
         $start = microtime(true);
 
@@ -44,12 +45,29 @@ class MySQLTableRepository implements TableRepository
         $statement->bindValue(':perPage', $pagination->getPerPage(), PDO::PARAM_INT);
         $statement->execute();
 
+        $executionTime = microtime(true) - $start;
         $results = $statement->fetchAll();
+
+        $count = $this->pdo->prepare('
+          SELECT
+            `TABLE_ROWS`
+          FROM
+            `information_schema`.`TABLES`
+          WHERE
+            `TABLE_SCHEMA` = :database
+            AND `TABLE_NAME` = :table
+        ');
+
+        $count->bindValue(':database', $database);
+        $count->bindValue(':table', $table);
+        $count->execute();
+
+        $pagination->setCount((int) $count->fetchColumn());
 
         return [
             $results,
             $statement->queryString,
-            microtime(true) - $start,
+            $executionTime,
         ];
     }
 }

@@ -37,7 +37,7 @@ class TableController extends AbstractController
         $database = $request->getAttribute('database');
         $table = $request->getAttribute('table');
 
-        $pagination = Pagination::createFromRequest($request, 1259);
+        $pagination = Pagination::createFromRequest($request);
 
         list($data, $query, $executionTime) = $this->tableRepository->paginatedData($database, $table, $pagination);
 

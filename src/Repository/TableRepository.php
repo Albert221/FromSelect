@@ -7,7 +7,8 @@ use FromSelect\Pagination;
 interface TableRepository
 {
     /**
-     * Returns an array of paginated rows array, query and execution time of query.
+     * Returns an array of paginated rows array, query and execution time
+     * of query and sets the count of rows in a pagination object.
      *
      * @param $database
      * @param $table
@@ -15,5 +16,5 @@ interface TableRepository
      *
      * @return array [rows, query, executionTime]
      */
-    public function paginatedData($database, $table, Pagination $pagination);
+    public function paginatedData($database, $table, Pagination &$pagination);
 }
