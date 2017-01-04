@@ -1,10 +1,9 @@
 .data-navigation {
     order: 2;
-    display: flex;
+    display: inline-flex;
     flex-flow: row wrap;
     align-items: baseline;
     justify-content: flex-end;
-    margin-bottom: 15px;
 
     h2 {
         @extend %hidden;

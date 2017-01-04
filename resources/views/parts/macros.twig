@@ -35,7 +35,7 @@
             {% endif %}
         </ul>
         <form action="{{ path_for(route.name, route.arguments, queryParams) }}" method="get">
-            <label for="jump">Jump to:</label>
+            <label for="jump">Jump to page:</label>
             <input type="number" name="page" id="jump" value="{{ pagination.currentPage }}" min="1" max="{{ pagination.pagesCount }}" required>
             <label for="perPage">Rows per page:</label>
             <input type="number" name="perPage" id="perPage" value="{{ pagination.perPage }}" min="1" required>
