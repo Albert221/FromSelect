@@ -24,7 +24,11 @@
             }
 
             td {
+                // TODO: Calculate max width of row in JS as for the most perfect fit.
+                max-width: 50vw;
                 padding: 15px;
+                overflow: hidden;
+                text-overflow: ellipsis;
 
                 @at-root .main-table.compact tbody tr td {
                     padding: 5px 15px;
