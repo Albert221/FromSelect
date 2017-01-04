@@ -6,6 +6,9 @@ use Slim\Http\Request;
 
 class Pagination
 {
+    const SORT_ASC = 0;
+    const SORT_DESC = 1;
+
     /**
      * @var int Current page.
      */
@@ -22,17 +25,31 @@ class Pagination
     private $count;
 
     /**
+     * @var string Field to sort on.
+     */
+    private $sortField;
+
+    /**
+     * @var int Order of sort.
+     */
+    private $sortOrder;
+
+    /**
      * Pagination constructor.
      *
      * @param int $currentPage
      * @param int $perPage
      * @param int $count
+     * @param string $sortField
+     * @param int $sortOrder
      */
-    public function __construct($currentPage, $perPage, $count = 0)
+    public function __construct($currentPage, $perPage, $count = 0, $sortField = '', $sortOrder = self::SORT_ASC)
     {
         $this->currentPage = $currentPage;
         $this->perPage = $perPage;
         $this->count = $count;
+        $this->sortField = $sortField;
+        $this->sortOrder = $sortOrder;
     }
 
     /**
@@ -48,7 +65,9 @@ class Pagination
         return new self(
             (int) $request->getQueryParam('page', 1),
             (int) $request->getQueryParam('perPage', 25),
-            $count
+            $count,
+            $request->getQueryParam('sort', ''),
+            (int) $request->getQueryParam('order', self::SORT_ASC)
         );
     }
 
@@ -100,5 +119,26 @@ class Pagination
     public function getFirstRow()
     {
         return $this->perPage * ($this->currentPage - 1);
+    }
+
+    /**
+     * Returns field to sort on.
+     *
+     * @return string
+     */
+    public function getSortField()
+    {
+        return $this->sortField;
+    }
+
+    /**
+     * Returns order of sorting, either ascendant (`self::SORT_ASC`)
+     * or descendant (`self::SORT_DESC`).
+     *
+     * @return int
+     */
+    public function getSortOrder()
+    {
+        return $this->sortOrder;
     }
 }

@@ -24,14 +24,18 @@
                 <tr>
                     <th></th>
                     {% for column in data[0]|keys %}
-                        <th><a href="{{ path_for(route.name, route.arguments, queryParams|merge({'sort': column})) }}">{{ column }}</a></th>
+                        {% set order = {'order': queryParams.sort == column ? (not queryParams.order ?: null) : null} %}
+                        <th><a href="{{ path_for(route.name, route.arguments, queryParams|merge({'sort': column})|merge(order)) }}">{{ column }}</a></th>
                     {% endfor %}
                 </tr>
             </thead>
             <tbody>
                 {% for row in data %}
                     <tr>
-                        <td><input type="checkbox" name="row[]" value="lol" form="actions"></td>
+                        <td>
+                            <label for="check{{ loop.index }}">Check</label>
+                            <input type="checkbox" id="check{{ loop.index }}" name="row[]" value="lol" form="actions">
+                        </td>
                         {% for column in row %}
                             <td>{{ column }}</td>
                         {% endfor %}
@@ -40,6 +44,15 @@
                     <tr><td>No rows found.</td></tr>
                 {% endfor %}
             </tbody>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    {% for column in data[0]|keys %}
+                        {% set order = {'order': queryParams.sort == column ? (not queryParams.order ?: null) : null} %}
+                        <th><a href="{{ path_for(route.name, route.arguments, queryParams|merge({'sort': column})|merge(order)) }}">{{ column }}</a></th>
+                    {% endfor %}
+                </tr>
+            </tfoot>
         </table>
         {{ macros.dataNavigation(pagination) }}
     </div>

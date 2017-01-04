@@ -28,9 +28,16 @@ class MySQLTableRepository implements TableRepository
         $start = microtime(true);
 
         $statement = $this->pdo->prepare(sprintf(
-            'SELECT * FROM `%s`.`%s` LIMIT :start, :perPage',
+            'SELECT * FROM `%s`.`%s` %s LIMIT :start, :perPage',
             $database,
-            $table
+            $table,
+            $pagination->getSortField() !== '' ?
+                sprintf(
+                    'ORDER BY `%s` %s',
+                    $pagination->getSortField(),
+                    $pagination->getSortOrder() === Pagination::SORT_ASC ?
+                        'ASC' : 'DESC'
+                ) : ''
         ));
 
         $statement->bindValue(':start', $pagination->getFirstRow(), PDO::PARAM_INT);

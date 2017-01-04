@@ -3,8 +3,11 @@
     border-collapse: collapse;
     white-space: nowrap;
 
-    th {
+    thead {
         border-bottom: 1px solid #ccc;
+    }
+
+    th {
         padding: 15px;
         text-align: left;
     }
@@ -21,7 +24,15 @@
                 @at-root .main-table.compact tbody tr td {
                     padding: 5px 15px;
                 }
+
+                label {
+                    @extend %hidden;
+                }
             }
         }
+    }
+
+    tfoot {
+        border-top: 1px solid #ccc;
     }
 }
