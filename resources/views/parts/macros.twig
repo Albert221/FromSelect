@@ -35,6 +35,9 @@
             {% endif %}
         </ul>
         <form action="{{ path_for(route.name, route.arguments, queryParams) }}" method="get">
+            {% for key, value in queryParams if key not in ['page', 'perPage'] %}
+                <input type="hidden" name="{{ key }}" value="{{ value }}">
+            {% endfor %}
             <label for="jump">Jump to page:</label>
             <input type="number" name="page" id="jump" value="{{ pagination.currentPage }}" min="1" max="{{ pagination.pagesCount }}" required>
             <label for="perPage">Rows per page:</label>
