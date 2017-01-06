@@ -12,12 +12,12 @@ databasesList.addEventListener('click', function (e) {
 
     const targetItem = e.target.parentNode.parentNode,
           targetButton = e.target;
-    if (targetItem.classList.contains('active')) {
-        targetItem.classList.remove('active');
+    if (targetItem.classList.contains('expanded')) {
+        targetItem.classList.remove('expanded');
         targetButton.textContent = '+';
         targetButton.setAttribute('aria-label', 'Expand');
     } else {
-        targetItem.classList.add('active');
+        targetItem.classList.add('expanded');
         targetButton.textContent = '–';
         targetButton.setAttribute('aria-label', 'Collapse');
     }

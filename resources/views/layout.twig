@@ -20,7 +20,7 @@
                 <ul class="list">
                     <li class="new"><a href="#">Add new database</a></li>
                     {% for database, tables in databaseTree %}
-                        <li {{ current.database == database ? 'class="current active"' }}>
+                        <li {{ current.database == database ? 'class="current expanded"' }}>
                             <a href="{{ path_for('database.show', {'database': database}) }}">
                                 <button aria-label="Expand">{{ current.database == database ? '–' : '+' }}</button>
                                 {{ database }}
