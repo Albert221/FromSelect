@@ -9,6 +9,12 @@
         @extend %hidden;
     }
 
+    .info {
+        margin-right: 15px;
+        font-size: 14px;
+        color: $muted;
+    }
+
     .pages {
         display: flex;
         flex-flow: row wrap;
@@ -35,7 +41,7 @@
     }
 
     [type="number"] {
-        width: 75px;
+        width: 60px;
         padding: 7px 0 7px 7px;
     }
 

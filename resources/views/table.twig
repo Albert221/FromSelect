@@ -25,7 +25,7 @@
                     <th></th>
                     {% for column in data[0]|keys %}
                         {% set order = {'order': column == queryParams.sort ? (not queryParams.order ?: null) : null} %}
-                        <th {{ column == queryParams.sort ? 'class="current"' }}>
+                        <th {{ column == queryParams.sort ? 'class="sorted"' }}>
                             <a href="{{ path_for(route.name, route.arguments, queryParams|merge({'sort': column})|merge(order)) }}">{{ column }}</a>
                         </th>
                     {% endfor %}
@@ -51,13 +51,19 @@
                     <th></th>
                     {% for column in data[0]|keys %}
                         {% set order = {'order': queryParams.sort == column ? (not queryParams.order ?: null) : null} %}
-                        <th {{ column == queryParams.sort ? 'class="current"' }}>
+                        <th {{ column == queryParams.sort ? 'class="sorted"' }}>
                             <a href="{{ path_for(route.name, route.arguments, queryParams|merge({'sort': column})|merge(order)) }}">{{ column }}</a>
                         </th>
                     {% endfor %}
                 </tr>
             </tfoot>
         </table>
-        {{ macros.dataNavigation(pagination) }}
+        <div class="columns">
+            {{ macros.dataNavigation(pagination) }}
+            <form action="#" method="post" class="actions" id="actions">
+                <span>Selected:</span>
+                <input type="submit" value="Delete">
+            </form>
+        </div>
     </div>
 {% endblock %}

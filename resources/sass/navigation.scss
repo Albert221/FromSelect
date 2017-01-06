@@ -62,6 +62,7 @@
         right: 0;
         list-style: none;
         overflow-x: hidden;
+        overflow-y: scroll;
 
         .new a {
             @include button($primaryColor);
@@ -88,6 +89,11 @@
                     font-size: 22px;
                     font-weight: bold;
                     cursor: pointer;
+
+                    &:hover, &:focus {
+                        background: lighten($sidebarBackground, 15%);
+                        outline: none;
+                    }
                 }
             }
 
@@ -110,10 +116,18 @@
 
             // For expanded database.
             &.active {
+                margin-bottom: 5px;
+
                 > a {
                     background: linear-gradient(to bottom,
                                     lighten($sidebarBackground, 15%),
                                     lighten($sidebarBackground, 10%));
+
+                    button:hover, button:focus {
+                        background: linear-gradient(to bottom,
+                                lighten($sidebarBackground, 30%),
+                                lighten($sidebarBackground, 25%));
+                    }
                 }
 
                 ul {
@@ -131,6 +145,12 @@
                     text-decoration: none;
                     text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
                     font-weight: bold;
+
+                    button:hover, button:focus {
+                        background: linear-gradient(to bottom,
+                                lighten($primaryColor, 30%),
+                                lighten($primaryColor, 15%));
+                    }
                 }
 
                 // For currently browsed table.

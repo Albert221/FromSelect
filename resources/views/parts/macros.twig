@@ -11,22 +11,26 @@
 {% macro dataNavigation(pagination) %}
     <nav class="data-navigation">
         <h2>Navigation</h2>
+        <p class="info">
+            Showing {{ pagination.firstRow }} - {{ pagination.firstRow + pagination.perPage }}
+            of all {{ pagination.count }} results.
+        </p>
         <ul class="pages">
             {% if pagination.currentPage > 1 %}
                 <li><a href="{{ path_for(route.name, route.arguments, queryParams|merge({'page': 1})) }}"><< First</a></li>
                 <li><a href="{{ path_for(route.name, route.arguments, queryParams|merge({'page': pagination.currentPage - 1})) }}">< Previous</a></li>
-                {% for i in 1..3 if i + 3 < pagination.currentPage %}
+                {% for i in 1..3 if i + 2 < pagination.currentPage %}
                     <li><a href="{{ path_for(route.name, route.arguments, queryParams|merge({'page': i})) }}">{{ i }}</a></li>
                 {% endfor %}
-                <li class="dots">...</li>
+                {% if pagination.currentPage - 3 > 3 %}<li class="dots">...</li>{% endif %}
             {% endif %}
-            {% for i in (pagination.currentPage - 3)..(pagination.currentPage + 3) if i >= 1 and i <= pagination.pagesCount %}
+            {% for i in (pagination.currentPage - 2)..(pagination.currentPage + 2) if i >= 1 and i <= pagination.pagesCount %}
                 <li {{ i == pagination.currentPage ? 'class="current"' }}>
                     <a href="{{ path_for(route.name, route.arguments, queryParams|merge({'page': i})) }}">{{ i }}</a>
                 </li>
             {% endfor %}
             {% if pagination.currentPage < pagination.pagesCount %}
-                <li class="dots">...</li>
+                {% if pagination.currentPage + 3 < pagination.pagesCount - 2 %}<li class="dots">...</li>{% endif %}
                 {% for i in (pagination.pagesCount - 2)..pagination.pagesCount if i - 3 > pagination.currentPage %}
                     <li><a href="{{ path_for(route.name, route.arguments, queryParams|merge({'page': i})) }}">{{ i }}</a></li>
                 {% endfor %}
