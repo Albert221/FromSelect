@@ -48,7 +48,29 @@ class MySQLTableRepository implements TableRepository
         $executionTime = microtime(true) - $start;
         $results = $statement->fetchAll();
 
-        $count = $this->pdo->prepare('
+        $pagination->setCount($this->rowsCount($database, $table));
+
+        return [
+            $results,
+            str_replace(
+                [':start', ':perPage'],
+                [$pagination->getFirstRow(), $pagination->getPerPage()],
+                $statement->queryString
+            ),
+            $executionTime,
+        ];
+    }
+
+    /**
+     * Returns the number of rows in specified table.
+     *
+     * @param string $database
+     * @param string $table
+     * @return int
+     */
+    public function rowsCount($database, $table)
+    {
+        $statement = $this->pdo->prepare('
           SELECT
             `TABLE_ROWS`
           FROM
@@ -58,16 +80,10 @@ class MySQLTableRepository implements TableRepository
             AND `TABLE_NAME` = :table
         ');
 
-        $count->bindValue(':database', $database);
-        $count->bindValue(':table', $table);
-        $count->execute();
+        $statement->bindValue(':database', $database);
+        $statement->bindValue(':table', $table);
+        $statement->execute();
 
-        $pagination->setCount((int) $count->fetchColumn());
-
-        return [
-            $results,
-            $statement->queryString,
-            $executionTime,
-        ];
+        return (int) $statement->fetchColumn();
     }
 }
