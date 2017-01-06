@@ -94,12 +94,17 @@
             ul {
                 display: none;
 
-                a {
-                    display: block;
-                    padding: 5px 15px 5px 29px;
-                    background: lighten($sidebarBackground, 20%);
-                    text-overflow: ellipsis;
-                    overflow: hidden;
+                li {
+                    // IE11 & Edge shows too big offset for list sub-elements.
+                    display: inline;
+
+                    a {
+                        display: block;
+                        padding: 5px 15px 5px 29px;
+                        background: lighten($sidebarBackground, 20%);
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                    }
                 }
             }
 

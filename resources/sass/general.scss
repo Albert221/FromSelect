@@ -24,10 +24,13 @@ input, textarea {
     left: 0;
     bottom: 0;
     width: $sidebarWidth;
+    z-index: 100;
 }
 
 .main {
-    margin-left: $sidebarWidth;
+    position: absolute;
+    left: $sidebarWidth;
+    width: calc(100vw - #{$sidebarWidth});
 }
 
 a {

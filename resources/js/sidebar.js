@@ -1,4 +1,6 @@
-// @TODO: Polyfill this because guys in Microshit are fucking lazy and they cannot implement basic shit in Edge.
+// Polyfill for DOM matches() function for IE11 and Edge
+Element.prototype.matches = Element.prototype.matches
+    || Element.prototype.msMatchesSelector;
 
 const databasesList = document.querySelector('.list');
 
