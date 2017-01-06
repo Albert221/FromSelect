@@ -2,7 +2,7 @@
 
 namespace FromSelect;
 
-use Slim\Http\Request;
+use Psr\Http\Message\ServerRequestInterface;
 
 class Pagination
 {
@@ -55,19 +55,21 @@ class Pagination
     /**
      * Creates Pagination instance from Request's query params.
      *
-     * @param Request $request
+     * @param ServerRequestInterface $request
      * @param int $count
      *
      * @return Pagination
      */
-    public static function createFromRequest(Request $request, $count = 0)
+    public static function createFromRequest(ServerRequestInterface $request, $count = 0)
     {
+        $params = $request->getQueryParams();
+
         return new self(
-            (int) $request->getQueryParam('page', 1),
-            (int) $request->getQueryParam('perPage', 25),
+            isset($params['page']) ? (int) $params['page'] : 1,
+            isset($params['perPage']) ? (int) $params['perPage'] : 25,
             $count,
-            $request->getQueryParam('sort', ''),
-            (int) $request->getQueryParam('order', self::SORT_ASC)
+            isset($params['sort']) ? $params['sort'] : '',
+            isset($params['order']) ? (int) $params['order'] : self::SORT_ASC
         );
     }
 
