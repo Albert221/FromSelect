@@ -1,0 +1,52 @@
+.login-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: darken($background, 15%);
+}
+
+.login {
+    max-width: 100vw;
+    width: 300px;
+    color: #fff;
+    background: $sidebarBackground;
+    box-shadow: 0 0 15px rgba(0, 0, 0, .3);
+
+    h1 {
+        font-size: 28px;
+    }
+
+    form {
+        label {
+            display: block;
+            margin: 0 0 3px 15px;
+            font-size: 90%;
+        }
+
+        .host-group {
+            flex: 2 0;
+        }
+
+        .port-group {
+            flex: 1 0;
+        }
+
+        [type="text"], [type="password"] {
+            width: 100%;
+            margin-bottom: 10px;
+            border: 0;
+            padding: 10px 15px;
+            color: #fff;
+            background: lighten($sidebarBackground, 15%);
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, .3);
+        }
+
+        [type="submit"] {
+            @include button($primaryColor);
+            width: calc(100% - 30px);
+            margin: 0 15px 15px;
+        }
+    }
+}
+

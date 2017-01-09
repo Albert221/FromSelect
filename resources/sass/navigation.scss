@@ -13,7 +13,7 @@
     align-items: center;
     height: 50px;
 
-    h1 a {
+    h1 a, &.no-a h1 {
         display: block;
         color: #fff;
         text-decoration: none;
@@ -21,10 +21,10 @@
         span {
             color: $primaryColor;
         }
+    }
 
-        &:hover, &:focus {
-            color: $primaryColor;
-        }
+    h1 a:hover, h1 a:focus {
+        color: $primaryColor;
     }
 }
 

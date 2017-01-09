@@ -4,7 +4,7 @@ namespace FromSelect;
 
 use FromSelect\Controller\ControllerDecorator;
 use FromSelect\ServiceProvider\FromFileServiceProvider;
-use FromSelect\ServiceProvider\PDODatabaseProvider;
+use FromSelect\ServiceProvider\PDOServiceProvider;
 use FromSelect\ServiceProvider\RouteServiceProvider;
 use FromSelect\ServiceProvider\ServiceProviderInterface;
 use FromSelect\ServiceProvider\TwigServiceProvider;
@@ -68,7 +68,7 @@ class FromSelect extends App
         $this->serviceProviders[] = new TwigServiceProvider();
         $this->serviceProviders[] = new RouteServiceProvider();
         $this->serviceProviders[] = new FromFileServiceProvider();
-        $this->serviceProviders[] = new PDODatabaseProvider();
+        $this->serviceProviders[] = new PDOServiceProvider();
 
         // @TODO: Separate this to a service provider
         $container['callableResolver'] = function ($c) {

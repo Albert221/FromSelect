@@ -23,7 +23,7 @@ class TestController extends AbstractController
         $this->databaseRepository = $databaseRepository;
     }
 
-    public function __invoke(Request $request, Response $response)
+    public function home(Request $request, Response $response)
     {
         $databases = $this->databaseRepository->getTree();
 
