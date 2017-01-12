@@ -2,6 +2,8 @@
 
 namespace FromSelect\Repository;
 
+use FromSelect\Entity\Database;
+
 interface DatabaseRepository
 {
     /**
@@ -9,7 +11,14 @@ interface DatabaseRepository
      *
      * @return array
      */
-    public function getTree();
+    public function tree();
+
+    /**
+     * Returns all databases.
+     *
+     * @return Database[]
+     */
+    public function all();
 
     /**
      * Returns an array with: 1. an array of Table objects 2. query 3. execution time.
@@ -17,5 +26,5 @@ interface DatabaseRepository
      * @param $name string Database name
      * @return array
      */
-    public function getTablesByDatabase($name);
+    public function tablesByDatabase($name);
 }

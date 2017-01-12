@@ -25,7 +25,7 @@ class TableController extends AbstractController
     }
 
     /**
-     * table.show: GET /{database}/{table}
+     * tables.show: GET /{database}/{table}
      *
      * @param Request $request
      * @param Response $response
@@ -41,7 +41,7 @@ class TableController extends AbstractController
 
         list($data, $query, $executionTime) = $this->tableRepository->paginatedData($database, $table, $pagination);
 
-        return $this->twig->render($response, '@fromselect/table.twig', [
+        return $this->twig->render($response, '@fromselect/tables/show.twig', [
             'data' => $data,
             'current' => [
                 'database' => $database,

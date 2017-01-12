@@ -21,14 +21,14 @@
                     <li class="new"><a href="#">Add new database</a></li>
                     {% for database, tables in databaseTree %}
                         <li {{ current.database == database ? 'class="current expanded"' }}>
-                            <a href="{{ path_for('database.show', {'database': database}) }}">
+                            <a href="{{ path_for('databases.show', {'database': database}) }}">
                                 <button aria-label="Expand">{{ current.database == database ? '–' : '+' }}</button>
                                 {{ database }}
                             </a>
                             <ul>
                                 {% for table in tables %}
                                     <li {{ current.table == table ? 'class="current"' }}>
-                                        <a href="{{ path_for('table.show', {'database': database, 'table': table}) }}">{{ table }}</a>
+                                        <a href="{{ path_for('tables.show', {'database': database, 'table': table}) }}">{{ table }}</a>
                                     </li>
                                 {% endfor %}
                             </ul>

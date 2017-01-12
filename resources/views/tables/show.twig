@@ -6,7 +6,7 @@
     <nav class="navbar">
         <h2>Table navigation</h2>
         <ul>
-            <li class="current"><a href="{{ path_for('table.show', {'database': current.database, 'table': current.table}, queryParams) }}">Tables</a></li>
+            <li class="current"><a href="{{ path_for('tables.show', {'database': current.database, 'table': current.table}, queryParams) }}">Tables</a></li>
             <li><a href="#">Operations</a></li>
         </ul>
     </nav>

@@ -4,6 +4,12 @@ namespace FromSelect\Entity;
 
 class Database
 {
+    const MAP = [
+        'SCHEMA_NAME' => 'name',
+        'DEFAULT_CHARACTER_SET_NAME' => 'characterSet',
+        'DEFAULT_COLLATION_NAME' => 'collation'
+    ];
+
     /**
      * @var string Database name.
      */
@@ -18,11 +24,6 @@ class Database
      * @var string Collation.
      */
     private $collation;
-
-    /**
-     * @var Table[]
-     */
-    private $tables = [];
 
     /**
      * @return string
@@ -70,21 +71,5 @@ class Database
     public function setCollation($collation)
     {
         $this->collation = $collation;
-    }
-
-    /**
-     * @return Table[]
-     */
-    public function getTables()
-    {
-        return $this->tables;
-    }
-
-    /**
-     * @param Table[] $table
-     */
-    public function addTable($table)
-    {
-        $this->tables[] = $table;
     }
 }

@@ -1,0 +1,39 @@
+{% extends '@fromselect/layout.twig' %}
+
+{% import '@fromselect/parts/macros.twig' as macros %}
+
+{% block main %}
+    <nav class="navbar">
+        <h2>Databases navigation</h2>
+        <ul>
+            <li class="current"><a href="{{ path_for('databases.all') }}">Databases</a></li>
+            <li><a href="#">SQL</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        <form action="#" method="post" class="actions" id="actions">
+            <span>Selected:</span>
+            <input type="submit" value="Delete">
+        </form>
+        <table class="main-table">
+            <thead>
+            <tr>
+                <th></th>
+                <th><a href="#">Database</a></th>
+                <th><a href="#">Character set</a></th>
+                <th><a href="#">Collation</a></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for database in databases %}
+                <tr>
+                    <td><input type="checkbox" name="row[]" value="{{ database.name }}" form="actions"></td>
+                    <td><a href="{{ path_for('databases.show', {'database': database.name}) }}">{{ database.name }}</a></td>
+                    <td>{{ database.characterSet }}</td>
+                    <td>{{ database.collation }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

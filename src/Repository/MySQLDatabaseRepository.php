@@ -2,6 +2,7 @@
 
 namespace FromSelect\Repository;
 
+use FromSelect\Entity\Database;
 use FromSelect\Entity\Mapper;
 use FromSelect\Entity\Table;
 use FromSelect\PDO;
@@ -19,6 +20,11 @@ class MySQLDatabaseRepository implements DatabaseRepository
     private $tableMapper;
 
     /**
+     * @var Mapper
+     */
+    private $databaseMapper;
+
+    /**
      * PDODatabaseRepository constructor.
      *
      * @param PDO $pdo
@@ -27,6 +33,7 @@ class MySQLDatabaseRepository implements DatabaseRepository
     {
         $this->pdo = $pdo;
         $this->tableMapper = new Mapper(Table::class);
+        $this->databaseMapper = new Mapper(Database::class);
     }
 
     /**
@@ -34,7 +41,7 @@ class MySQLDatabaseRepository implements DatabaseRepository
      *
      * @return array
      */
-    public function getTree()
+    public function tree()
     {
         $result = $this->pdo->query('
             SELECT
@@ -56,6 +63,27 @@ class MySQLDatabaseRepository implements DatabaseRepository
         return $tree;
     }
 
+    /**
+     * Returns all databases.
+     *
+     * @return Database[]
+     */
+    public function all()
+    {
+        $results = $this->pdo->query('
+            SELECT
+              `SCHEMA_NAME`,
+              `DEFAULT_CHARACTER_SET_NAME`,
+              `DEFAULT_COLLATION_NAME`
+            FROM
+              `information_schema`.`SCHEMATA`
+        ')->fetchAll();
+
+        $this->databaseMapper->mapResults($results, Database::MAP);
+
+        return $results;
+    }
+
 
     /**
      * Returns an array of table's objects in the specified database.
@@ -63,7 +91,7 @@ class MySQLDatabaseRepository implements DatabaseRepository
      * @param $name string Database name
      * @return Table[]
      */
-    public function getTablesByDatabase($name)
+    public function tablesByDatabase($name)
     {
         $statement = $this->pdo->prepare('
             SELECT

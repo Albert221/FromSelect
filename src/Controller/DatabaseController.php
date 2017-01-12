@@ -25,7 +25,23 @@ class DatabaseController extends AbstractController
     }
 
     /**
-     * database.show: GET /{database}
+     * databases.all: GET /
+     *
+     * @param Request $request
+     * @param Response $response
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function all(Request $request, Response $response)
+    {
+        $databases = $this->databaseRepository->all();
+
+        return $this->twig->render($response, '@fromselect/databases/all.twig', [
+            'databases' => $databases
+        ]);
+    }
+
+    /**
+     * databases.show: GET /{database}
      *
      * @param Request $request
      * @param Response $response
@@ -35,9 +51,9 @@ class DatabaseController extends AbstractController
     {
         $database = $request->getAttribute('database');
 
-        $tables = $this->databaseRepository->getTablesByDatabase($database);
+        $tables = $this->databaseRepository->tablesByDatabase($database);
 
-        return $this->twig->render($response, '@fromselect/database.twig', [
+        return $this->twig->render($response, '@fromselect/databases/show.twig', [
             'tables' => $tables,
             'current' => [
                 'database' => $database
