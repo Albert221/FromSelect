@@ -41,7 +41,7 @@ class DatabaseController extends AbstractController
     }
 
     /**
-     * databases.show: GET /{database}
+     * databases.show: GET /db/{database}
      *
      * @param Request $request
      * @param Response $response

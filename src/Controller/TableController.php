@@ -25,7 +25,7 @@ class TableController extends AbstractController
     }
 
     /**
-     * tables.show: GET /{database}/{table}
+     * tables.show: GET /db/{database}/{table}
      *
      * @param Request $request
      * @param Response $response
