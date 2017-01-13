@@ -67,8 +67,8 @@ class FromSelect extends App
 
         $this->serviceProviders[] = new TwigServiceProvider();
         $this->serviceProviders[] = new RouteServiceProvider();
-        $this->serviceProviders[] = new FromFileServiceProvider();
         $this->serviceProviders[] = new PDOServiceProvider();
+        $this->serviceProviders[] = new FromFileServiceProvider();
 
         // @TODO: Separate this to a service provider
         $container['callableResolver'] = function ($c) {
