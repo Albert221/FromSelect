@@ -114,8 +114,13 @@
                 }
             }
 
+            // Hidden database/table because of search.
+            &.hidden, .hidden {
+                display: none;
+            }
+
             // For expanded database.
-            &.expanded {
+            &.expanded, &.searchExpanded {
                 margin-bottom: 5px;
 
                 > a {
