@@ -54,7 +54,9 @@ Element.prototype.matches = Element.prototype.matches
             }
 
             // TODO: Somehow do what should be done, e.g. aria-label and plus or minus symbol.
-            databaseEl.classList.add('searchExpanded');
+            if (database != '' && table != '') {
+                databaseEl.classList.add('searchExpanded');
+            }
 
             if (database != '') {
                 const value = databaseEl.querySelector('a').textContent.replace(/[\–\+]/, '').trim();
