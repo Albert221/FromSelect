@@ -19,7 +19,7 @@
                 <input type="submit" value="Delete">
             </form>
         </div>
-        <table class="main-table">
+        <table class="data-table">
             <thead>
                 <tr>
                     <th></th>
@@ -66,4 +66,9 @@
             </form>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script src="{{ base_url() }}/assets/data-table.js"></script>
 {% endblock %}
