@@ -120,12 +120,12 @@
             }
 
             // Filtered tables to be highlighted among non-filtered.
-            &.expanded.searchExpanded :not(.hidden) > a {
+            &.expanded.search-expanded :not(.hidden) > a {
                 background: lighten($sidebarBackground, 30%);
             }
 
             // For expanded database.
-            &.expanded, &.searchExpanded {
+            &.expanded, &.search-expanded {
                 margin-bottom: 5px;
 
                 > a {

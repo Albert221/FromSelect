@@ -45,7 +45,7 @@ Element.prototype.matches = Element.prototype.matches
         tableStrict = table.indexOf('"') == 0 && table.indexOf('"', 1) == table.length - 1;
         table = table.replace(/"/g, '');
 
-        databasesList.querySelectorAll('li').forEach(el => el.classList.remove('hidden', 'searchExpanded'));
+        databasesList.querySelectorAll('li').forEach(el => el.classList.remove('hidden', 'search-expanded'));
 
         // Databases filter.
         databasesList.querySelectorAll('.list > li').forEach(databaseEl => {
@@ -55,7 +55,7 @@ Element.prototype.matches = Element.prototype.matches
 
             // TODO: Somehow do what should be done, e.g. aria-label and plus or minus symbol.
             if (database != '' && table != '') {
-                databaseEl.classList.add('searchExpanded');
+                databaseEl.classList.add('search-expanded');
             }
 
             if (database != '') {
@@ -107,12 +107,12 @@ Element.prototype.matches = Element.prototype.matches
 
             // Show databases which tables are filtered.
             if (!empty && database == '' && table != '') {
-                databaseEl.classList.add('searchExpanded');
+                databaseEl.classList.add('search-expanded');
             }
 
             // If database is already hidden remove its expansion.
             if (databaseEl.classList.contains('hidden')) {
-                databaseEl.classList.remove('searchExpanded');
+                databaseEl.classList.remove('search-expanded');
             }
         });
     });
