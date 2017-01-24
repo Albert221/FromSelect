@@ -26,11 +26,11 @@ Element.prototype.matches = Element.prototype.matches
     });
 
 
-    // For explanation of the search syntax, take a look here:
+    // For explanation of the filter syntax, take a look here:
     // https://github.com/Albert221/FromSelect/issues/9#issuecomment-274047742
-    const searchField = document.getElementById('search');
-    searchField.addEventListener('input', function (e) {
-        const phrase = searchField.value;
+    const filterField = document.getElementById('filter');
+    filterField.addEventListener('input', function (e) {
+        const phrase = filterField.value;
         // Split phrase using delimeter `.`.
         const phrases = phrase.split('.');
         let database, databaseStrict, table, tableStrict;
@@ -47,7 +47,7 @@ Element.prototype.matches = Element.prototype.matches
 
         databasesList.querySelectorAll('li').forEach(el => el.classList.remove('hidden', 'searchExpanded'));
 
-        // Databases search.
+        // Databases filter.
         databasesList.querySelectorAll('.list > li').forEach(databaseEl => {
             if (databaseEl.classList.contains('new')) {
                 return;
@@ -72,7 +72,7 @@ Element.prototype.matches = Element.prototype.matches
             }
 
             let empty = true;
-            // Tables search.
+            // Tables filter.
             databaseEl.querySelectorAll('li').forEach(tableEl => {
                 if (table == '') {
                     empty = false;
