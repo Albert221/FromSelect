@@ -24,7 +24,8 @@ class PDOServiceProvider implements ServiceProviderInterface
             );
 
             $pdo = new PDO($dsn, $config['user'], $config['password'], [
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES => false
             ]);
 
             return $pdo;
