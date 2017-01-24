@@ -114,9 +114,14 @@
                 }
             }
 
-            // Hidden database/table because of search.
-            &.hidden, .hidden {
+            // Hidden databases or tables because of filter.
+            &.hidden, &:not(.expanded) .hidden {
                 display: none;
+            }
+
+            // Filtered tables to be highlighted among non-filtered.
+            &.expanded.searchExpanded :not(.hidden) > a {
+                background: lighten($sidebarBackground, 30%);
             }
 
             // For expanded database.

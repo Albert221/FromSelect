@@ -105,9 +105,14 @@ Element.prototype.matches = Element.prototype.matches
                 databaseEl.classList.remove('hidden');
             }
 
-            // Show database which tables are filtered.
+            // Show databases which tables are filtered.
             if (!empty && database == '' && table != '') {
                 databaseEl.classList.add('searchExpanded');
+            }
+
+            // If database is already hidden remove its expansion.
+            if (databaseEl.classList.contains('hidden')) {
+                databaseEl.classList.remove('searchExpanded');
             }
         });
     });
