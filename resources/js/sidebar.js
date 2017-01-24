@@ -94,15 +94,20 @@ Element.prototype.matches = Element.prototype.matches
                 }
             });
 
-            // If database has tables that were not hidden, then show database
+            // If database has tables that were not hidden, then show database.
             if (empty && database == '') {
                 databaseEl.classList.add('hidden');
             }
 
             // If the database is not due to strictly-database search and has
-            // not hidden tables, then show database
+            // not hidden tables, then show database.
             if (!empty && database == table) {
                 databaseEl.classList.remove('hidden');
+            }
+
+            // Show database which tables are filtered.
+            if (!empty && database == '' && table != '') {
+                databaseEl.classList.add('searchExpanded');
             }
         });
     });
