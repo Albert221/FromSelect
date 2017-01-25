@@ -43,7 +43,12 @@ class PDOServiceProvider implements ServiceProviderInterface
         ];
 
         $iniConfigPath = dirname(dirname(__DIR__)).'/config.ini';
-        $iniConfig = parse_ini_file($iniConfigPath, true)['connection'];
+
+        if (file_exists($iniConfigPath)) {
+            $iniConfig = parse_ini_file($iniConfigPath, true)['connection'];
+        } else {
+            $iniConfig = [];
+        }
 
         return array_merge($defaultConfig, $iniConfig);
     }
