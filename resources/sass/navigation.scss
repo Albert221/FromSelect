@@ -89,11 +89,11 @@
                     font-size: 22px;
                     font-weight: bold;
                     cursor: pointer;
+                }
 
-                    &:hover, &:focus {
-                        background: lighten($sidebarBackground, 15%);
-                        outline: none;
-                    }
+                &:hover button, button:hover, button:focus {
+                    background: lighten($sidebarBackground, 15%);
+                    outline: none;
                 }
             }
 
@@ -133,7 +133,7 @@
                                     lighten($sidebarBackground, 15%),
                                     lighten($sidebarBackground, 10%));
 
-                    button:hover, button:focus {
+                    &:hover button, button:hover, button:focus {
                         background: linear-gradient(to bottom,
                                 lighten($sidebarBackground, 30%),
                                 lighten($sidebarBackground, 25%));
@@ -156,7 +156,7 @@
                     text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
                     font-weight: bold;
 
-                    button:hover, button:focus {
+                    &:hover button, button:hover, button:focus {
                         background: linear-gradient(to bottom,
                                 lighten($primaryColor, 30%),
                                 lighten($primaryColor, 15%));
