@@ -11,14 +11,6 @@ $container[DatabaseRepository::class] = function ($c) {
     return new \FromSelect\Repository\MySQLDatabaseRepository($c['pdo']);
 };
 
-// @TODO: Move this to a better place.
-$container->extend('view', function (\Slim\Views\Twig $twig, $c) {
-    $twig->getEnvironment()->addGlobal('databaseTree',
-        $c[DatabaseRepository::class]->tree());
-
-    return $twig;
-});
-
 $container[TableRepository::class] = function ($c) {
     return new \FromSelect\Repository\MySQLTableRepository($c['pdo']);
 };
