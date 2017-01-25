@@ -23,6 +23,8 @@ Element.prototype.matches = Element.prototype.matches
             targetButton.textContent = '–';
             targetButton.setAttribute('aria-label', 'Collapse');
         }
+
+        targetButton.blur();
     });
 
 
