@@ -37,3 +37,9 @@
         </table>
     </div>
 {% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script src="{{ base_url() }}/assets/main-table.js"></script>
+{% endblock %}
+
