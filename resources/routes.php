@@ -8,8 +8,10 @@ use FromSelect\Controller\TableController;
 use FromSelect\FromSelect;
 
 $app->get('/', DatabaseController::class.':all')->setName('databases.all');
+
 $app->get('/login', LoginController::class.':login')->setName('login.login');
 $app->post('/login', LoginController::class.':auth')->setName('login.auth');
+$app->get('/logout', LoginController::class.':logout')->setName('login.logout');
 
 $app->get('/db/new', DatabaseController::class.':newAction')->setName('databases.new');
 $app->get('/db/{database}', DatabaseController::class.':show')->setName('databases.show');

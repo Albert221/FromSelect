@@ -3,7 +3,7 @@
 namespace FromSelect\Repository;
 
 use FromSelect\Pagination;
-use FromSelect\PDO;
+use FromSelect\PDO\PDO;
 
 class MySQLTableRepository implements TableRepository
 {

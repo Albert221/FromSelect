@@ -5,7 +5,7 @@ namespace FromSelect\Repository;
 use FromSelect\Entity\Database;
 use FromSelect\Entity\Mapper;
 use FromSelect\Entity\Table;
-use FromSelect\PDO;
+use FromSelect\PDO\PDO;
 
 class MySQLDatabaseRepository implements DatabaseRepository
 {
