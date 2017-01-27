@@ -7,8 +7,16 @@ use FromSelect\PDO\PDO;
 
 class MySQLTableRepository implements TableRepository
 {
+    /**
+     * @var PDO
+     */
     private $pdo;
 
+    /**
+     * MySQLTableRepository constructor.
+     *
+     * @param PDO $pdo
+     */
     public function __construct(PDO $pdo)
     {
         $this->pdo = $pdo;

@@ -32,6 +32,11 @@ class PDOServiceProvider implements ServiceProviderInterface
         };
     }
 
+    /**
+     * Returns connection configuration.
+     *
+     * @return array
+     */
     private function getConfig()
     {
         $defaultConfig = [
