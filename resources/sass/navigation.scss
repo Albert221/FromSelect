@@ -129,11 +129,13 @@
                 margin-bottom: 5px;
 
                 > a {
+                    background: lighten($sidebarBackground, 10%);
                     background: linear-gradient(to bottom,
                                     lighten($sidebarBackground, 15%),
                                     lighten($sidebarBackground, 10%));
 
                     &:hover button, button:hover, button:focus {
+                        background: lighten($primaryColor, 15%);
                         background: linear-gradient(to bottom,
                                 lighten($sidebarBackground, 30%),
                                 lighten($sidebarBackground, 25%));
@@ -149,6 +151,7 @@
             &.current {
                 > a {
                     color: #fff;
+                    background: $primaryColor;
                     background: linear-gradient(to bottom,
                             lighten($primaryColor, 15%),
                             $primaryColor);
@@ -199,7 +202,10 @@
         }
 
         .current a {
-            background: lighten($tableNavigationBackground, 15%);
+            background: $primaryColor;
+            background: linear-gradient(to bottom,
+                    lighten($primaryColor, 15%),
+                    $primaryColor);
         }
     }
 }
