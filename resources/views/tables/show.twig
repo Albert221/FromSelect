@@ -7,6 +7,7 @@
         <h2>Table navigation</h2>
         <ul>
             <li class="current"><a href="{{ path_for('tables.show', {'database': current.database, 'table': current.table}, queryParams) }}">Tables</a></li>
+            <li><a href="{{ path_for('tables.structure', {'database': current.database, 'table': current.table}) }}">Structure</a></li>
             <li><a href="#">Operations</a></li>
         </ul>
     </nav>
@@ -20,10 +21,11 @@
             </form>
         </div>
         <table class="main-table">
+            {% set columns = data is not empty ? data[0]|keys : columns %}
             <thead>
                 <tr>
                     <th></th>
-                    {% for column in data[0]|keys %}
+                    {% for column in columns %}
                         {% set order = {'order': column == queryParams.sort ? (not queryParams.order ?: null) : null} %}
                         <th {{ column == queryParams.sort ? 'class="sorted"' }}>
                             <a href="{{ path_for(route.name, route.arguments, queryParams|merge({'sort': column})|merge(order)) }}">{{ column }}</a>
@@ -43,13 +45,13 @@
                         {% endfor %}
                     </tr>
                 {% else %}
-                    <tr><td>No rows found.</td></tr>
+                    <tr><td colspan="{{ columns|length + 1 }}">No rows found.</td></tr>
                 {% endfor %}
             </tbody>
             <tfoot>
                 <tr>
                     <th></th>
-                    {% for column in data[0]|keys %}
+                    {% for column in columns %}
                         {% set order = {'order': queryParams.sort == column ? (not queryParams.order ?: null) : null} %}
                         <th {{ column == queryParams.sort ? 'class="sorted"' }}>
                             <a href="{{ path_for(route.name, route.arguments, queryParams|merge({'sort': column})|merge(order)) }}">{{ column }}</a>

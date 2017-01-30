@@ -3,6 +3,7 @@
 namespace FromSelect\Repository;
 
 use FromSelect\Pagination;
+use FromSelect\Entity\Column;
 
 interface TableRepository
 {
@@ -16,14 +17,23 @@ interface TableRepository
      *
      * @return array [rows, query, executionTime]
      */
-    public function paginatedData($database, $table, Pagination &$pagination);
+    public function data($database, $table, Pagination $pagination);
 
     /**
-     * Returns the number of rows in specified table.
+     * Returns a Column objects containing all table fields.
      *
      * @param string $database
      * @param string $table
-     * @return int
+     * @return Column[]
      */
-    public function rowsCount($database, $table);
+    public function columns($database, $table);
+
+    /**
+     * Returns all table indexes.
+     *
+     * @param string $database
+     * @param string $table
+     * @return array
+     */
+    public function indexes($database, $table);
 }

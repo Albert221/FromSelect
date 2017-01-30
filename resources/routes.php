@@ -17,3 +17,4 @@ $app->get('/db/new', DatabaseController::class.':newAction')->setName('databases
 $app->get('/db/{database}', DatabaseController::class.':show')->setName('databases.show');
 
 $app->get('/db/{database}/{table}', TableController::class.':show')->setName('tables.show');
+$app->get('/db/{database}/{table}/structure', TableController::class.':structure')->setName('tables.structure');
