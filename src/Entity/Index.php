@@ -5,8 +5,9 @@ namespace FromSelect\Entity;
 class Index
 {
     const MAP = [
-        'NON_UNIQUE' => 'unique',
         'INDEX_NAME' => 'name',
+        'COLUMN_NAME' => 'columnName',
+        'NON_UNIQUE' => 'unique',
         'COLLATION' => 'collation',
         'CARDINALITY' => 'cardinality',
         'PACKED' => 'packed',
@@ -19,6 +20,11 @@ class Index
      * @var string
      */
     private $name;
+
+    /**
+     * @var string
+     */
+    private $columnName;
 
     /**
      * @var string
@@ -69,6 +75,22 @@ class Index
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getColumnName()
+    {
+        return $this->columnName;
+    }
+
+    /***
+     * @param string $columnName
+     */
+    public function setColumnName($columnName)
+    {
+        $this->columnName = $columnName;
     }
 
     /**

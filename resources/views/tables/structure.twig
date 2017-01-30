@@ -54,7 +54,8 @@
         <table class="main-table">
             <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>Index name</th>
+                    <th>Column name</th>
                     <th>Collation</th>
                     <th>Type</th>
                     <th>Nullable</th>
@@ -68,6 +69,7 @@
                 {% for index in indexes %}
                     <tr>
                         <td>{{ index.name }}</td>
+                        <td>{{ index.columnName }}</td>
                         <td>{{ index.collation }}</td>
                         <td>{{ index.type }}</td>
                         <td>{{ index.nullable ? 'Yes' : 'No' }}</td>
@@ -78,10 +80,23 @@
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="8">No indexes found.</td>
+                        <td colspan="9">No indexes found.</td>
                     </tr>
                 {% endfor %}
             </tbody>
+            <tfoot>
+                <tr>
+                    <th>Index name</th>
+                    <th>Column name</th>
+                    <th>Collation</th>
+                    <th>Type</th>
+                    <th>Nullable</th>
+                    <th>Unique</th>
+                    <th>Cardinality</th>
+                    <th>Packed</th>
+                    <th>Comment</th>
+                </tr>
+            </tfoot>
         </table>
     </div>
 {% endblock %}

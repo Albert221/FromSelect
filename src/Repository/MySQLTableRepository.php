@@ -166,6 +166,7 @@ class MySQLTableRepository implements TableRepository
             SELECT
               `NON_UNIQUE`,
               `INDEX_NAME`,
+              `COLUMN_NAME`,
               `COLLATION`,
               `CARDINALITY`,
               `PACKED`,
