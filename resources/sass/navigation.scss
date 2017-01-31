@@ -120,7 +120,7 @@
             }
 
             // Filtered tables to be highlighted among non-filtered.
-            &.expanded.search-expanded :not(.hidden) > a {
+            &.expanded.search-expanded :not(.hidden):not(.current) > a {
                 background: lighten($sidebarBackground, 30%);
             }
 
@@ -168,7 +168,9 @@
 
                 // For currently browsed table.
                 .current a {
-                    background: lighten($sidebarBackground, 15%);
+                    //background: lighten($sidebarBackground, 15%);
+                    background: lighten($primaryColor, 0%);
+                    color: #fff;
                     text-decoration: none;
                 }
             }
