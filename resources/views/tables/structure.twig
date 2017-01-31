@@ -1,14 +1,16 @@
 {% extends '@fromselect/layout.twig' %}
 
+{% block navbar %}
+    <h2>Table navigation</h2>
+    <ul class="nav-links">
+        <li><a href="{{ path_for('tables.show', {'database': current.database, 'table': current.table}) }}">Tables</a></li>
+        <li class="current"><a href="{{ path_for('tables.structure', {'database': current.database, 'table': current.table}) }}">Structure</a></li>
+        <li><a href="#">Operations</a></li>
+    </ul>
+    {{ parent() }}
+{% endblock %}
+
 {% block main %}
-    <nav class="navbar">
-        <h2>Table navigation</h2>
-        <ul>
-            <li><a href="{{ path_for('tables.show', {'database': current.database, 'table': current.table}) }}">Tables</a></li>
-            <li class="current"><a href="{{ path_for('tables.structure', {'database': current.database, 'table': current.table}) }}">Structure</a></li>
-            <li><a href="#">Operations</a></li>
-        </ul>
-    </nav>
     <div class="content">
         <h3>Columns</h3>
         <table class="main-table">

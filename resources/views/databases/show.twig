@@ -2,14 +2,16 @@
 
 {% import '@fromselect/parts/macros.twig' as macros %}
 
+{% block navbar %}
+    <h2>Database navigation</h2>
+    <ul class="nav-links">
+        <li class="current"><a href="{{ path_for('databases.show', {'database': current.database}) }}">Tables</a></li>
+        <li><a href="#">Operations</a></li>
+    </ul>
+    {{ parent() }}
+{% endblock %}
+
 {% block main %}
-    <nav class="navbar">
-        <h2>Database navigation</h2>
-        <ul>
-            <li class="current"><a href="{{ path_for('databases.show', {'database': current.database}) }}">Tables</a></li>
-            <li><a href="#">Operations</a></li>
-        </ul>
-    </nav>
     <div class="content">
         <form action="#" method="post" class="actions" id="actions">
             <span>Selected:</span>

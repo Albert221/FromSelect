@@ -2,6 +2,8 @@
 
 namespace FromSelect\Controller;
 
+use FromSelect\Breadcrumbs\Breadcrumb;
+use FromSelect\Breadcrumbs\BreadcrumbsStack;
 use FromSelect\Repository\DatabaseRepository;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -14,6 +16,11 @@ class DatabaseController extends AbstractController
     private $databaseRepository;
 
     /**
+     * @var BreadcrumbsStack
+     */
+    private $breadcrumbs;
+
+    /**
      * DatabaseController constructor, sets database tree as Twig global
      * variable because it is being used on all views.
      *
@@ -22,6 +29,7 @@ class DatabaseController extends AbstractController
     public function __construct(DatabaseRepository $databaseRepository)
     {
         $this->databaseRepository = $databaseRepository;
+        $this->breadcrumbs = new BreadcrumbsStack();
     }
 
     /**
@@ -33,10 +41,13 @@ class DatabaseController extends AbstractController
      */
     public function all(Request $request, Response $response)
     {
+        $this->fillCrumbs();
+
         $databases = $this->databaseRepository->all();
 
         return $this->twig->render($response, '@fromselect/databases/all.twig', [
-            'databases' => $databases
+            'databases' => $databases,
+            'breadcrumbs' => $this->breadcrumbs
         ]);
     }
 
@@ -51,6 +62,10 @@ class DatabaseController extends AbstractController
     {
         $database = $request->getAttribute('database');
 
+        $this->fillCrumbs();
+        $this->breadcrumbs->push(new Breadcrumb("Database: $database", $this->router->pathFor('databases.show',
+            ['database' => $database])));
+
         $tables = $this->databaseRepository->tablesByDatabase($database);
 
         return $this->twig->render($response, '@fromselect/databases/show.twig', [
@@ -58,6 +73,18 @@ class DatabaseController extends AbstractController
             'current' => [
                 'database' => $database
             ],
+            'breadcrumbs' => $this->breadcrumbs
         ]);
+    }
+
+    /**
+     * Fills breadcrumbs with host crumb.
+     */
+    private function fillCrumbs()
+    {
+        // FIXME: Hardcoded host
+        $this->breadcrumbs->push(
+            new Breadcrumb('Host: localhost', $this->router->pathFor('databases.all'))
+        );
     }
 }

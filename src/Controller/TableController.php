@@ -2,6 +2,8 @@
 
 namespace FromSelect\Controller;
 
+use FromSelect\Breadcrumbs\Breadcrumb;
+use FromSelect\Breadcrumbs\BreadcrumbsStack;
 use FromSelect\Entity\Column;
 use FromSelect\Pagination;
 use FromSelect\Repository\TableRepository;
@@ -17,6 +19,11 @@ class TableController extends AbstractController
     private $tableRepository;
 
     /**
+     * @var BreadcrumbsStack
+     */
+    private $breadcrumbs;
+
+    /**
      * TableController constructor.
      *
      * @param TableRepository $tableRepository
@@ -24,6 +31,7 @@ class TableController extends AbstractController
     public function __construct(TableRepository $tableRepository)
     {
         $this->tableRepository = $tableRepository;
+        $this->breadcrumbs = new BreadcrumbsStack();
     }
 
     /**
@@ -39,10 +47,12 @@ class TableController extends AbstractController
         $database = $request->getAttribute('database');
         $table = $request->getAttribute('table');
 
-        $pagination = Pagination::createFromRequest($request);
+        $this->fillCrumbs($database, $table);
 
+        $pagination = Pagination::createFromRequest($request);
         list($data, $query, $executionTime) = $this->tableRepository->data($database, $table, $pagination);
 
+        // If no data is retrieved then pass columns to view for the table headings.
         if (count($data) === 0) {
             $columns = $this->tableRepository->columns($database, $table);
             array_walk($columns, function (Column &$column) {
@@ -62,6 +72,7 @@ class TableController extends AbstractController
                 'executionTime' => $executionTime,
             ],
             'pagination' => $pagination,
+            'breadcrumbs' => $this->breadcrumbs
         ]);
     }
 
@@ -78,6 +89,10 @@ class TableController extends AbstractController
         $database = $request->getAttribute('database');
         $table = $request->getAttribute('table');
 
+        $this->fillCrumbs($database, $table);
+        $this->breadcrumbs->push(new Breadcrumb('Structure', $this->router->pathFor('tables.structure',
+            ['database' => $database, 'table' => $table])));
+
         $columns = $this->tableRepository->columns($database, $table);
         $indexes = $this->tableRepository->indexes($database, $table);
 
@@ -87,7 +102,24 @@ class TableController extends AbstractController
             'current' => [
                 'database' => $database,
                 'table' => $table
-            ]
+            ],
+            'breadcrumbs' => $this->breadcrumbs
         ]);
+    }
+
+    /**
+     * Fills breadcrumbs with given database and table crumb.
+     *
+     * @param string $database
+     * @param string $table
+     */
+    private function fillCrumbs($database, $table)
+    {
+        // FIXME: Hardcoded host
+        $this->breadcrumbs->push(
+            new Breadcrumb('Host: localhost', $this->router->pathFor('databases.all')),
+            new Breadcrumb("Database: $database", $this->router->pathFor('databases.show', ['database' => $database])),
+            new Breadcrumb("Table: $table", $this->router->pathFor('tables.show', ['database' => $database, 'table' => $table]))
+        );
     }
 }
