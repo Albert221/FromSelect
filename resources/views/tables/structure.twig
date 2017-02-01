@@ -13,7 +13,7 @@
 {% block main %}
     <div class="content">
         <h3>Columns</h3>
-        <table class="main-table">
+        <table class="data-table">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -54,7 +54,7 @@
             </tfoot>
         </table>
         <h3>Indexes</h3>
-        <table class="main-table">
+        <table class="data-table">
             <thead>
                 <tr>
                     <th>Index name</th>
@@ -102,4 +102,9 @@
             </tfoot>
         </table>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script src="{{ base_url() }}/assets/data-table.js"></script>
 {% endblock %}

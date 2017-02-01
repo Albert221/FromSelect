@@ -18,6 +18,16 @@
     }
 
     const dataTables = document.querySelectorAll('.data-table');
+
+    // Add class to checked rows.
+    dataTables.forEach(dataTable => {
+        dataTable.querySelectorAll('tr td:first-child [type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                checkbox.parentNode.parentNode.classList.toggle('checked', checkbox.checked);
+            });
+        });
+    });
+
     dataTables.forEach(dataTable => {
         if (dataTable.clientWidth <= dataTable.parentNode.clientWidth) {
             return;
