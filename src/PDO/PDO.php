@@ -1,6 +1,6 @@
 <?php
 
-namespace FromSelect;
+namespace FromSelect\PDO;
 
 class PDO extends \PDO
 {

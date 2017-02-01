@@ -89,11 +89,11 @@
                     font-size: 22px;
                     font-weight: bold;
                     cursor: pointer;
+                }
 
-                    &:hover, &:focus {
-                        background: lighten($sidebarBackground, 15%);
-                        outline: none;
-                    }
+                &:hover button, button:hover, button:focus {
+                    background: lighten($sidebarBackground, 15%);
+                    outline: none;
                 }
             }
 
@@ -120,7 +120,7 @@
             }
 
             // Filtered tables to be highlighted among non-filtered.
-            &.expanded.search-expanded :not(.hidden) > a {
+            &.expanded.search-expanded :not(.hidden):not(.current) > a {
                 background: lighten($sidebarBackground, 30%);
             }
 
@@ -129,11 +129,13 @@
                 margin-bottom: 5px;
 
                 > a {
+                    background: lighten($sidebarBackground, 10%);
                     background: linear-gradient(to bottom,
                                     lighten($sidebarBackground, 15%),
                                     lighten($sidebarBackground, 10%));
 
-                    button:hover, button:focus {
+                    &:hover button, button:hover, button:focus {
+                        background: lighten($primaryColor, 15%);
                         background: linear-gradient(to bottom,
                                 lighten($sidebarBackground, 30%),
                                 lighten($sidebarBackground, 25%));
@@ -149,6 +151,7 @@
             &.current {
                 > a {
                     color: #fff;
+                    background: $primaryColor;
                     background: linear-gradient(to bottom,
                             lighten($primaryColor, 15%),
                             $primaryColor);
@@ -156,7 +159,7 @@
                     text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
                     font-weight: bold;
 
-                    button:hover, button:focus {
+                    &:hover button, button:hover, button:focus {
                         background: linear-gradient(to bottom,
                                 lighten($primaryColor, 30%),
                                 lighten($primaryColor, 15%));
@@ -165,7 +168,9 @@
 
                 // For currently browsed table.
                 .current a {
-                    background: lighten($sidebarBackground, 15%);
+                    //background: lighten($sidebarBackground, 15%);
+                    background: lighten($primaryColor, 0%);
+                    color: #fff;
                     text-decoration: none;
                 }
             }
@@ -174,24 +179,30 @@
 }
 
 .navbar {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row wrap;
     background: $tableNavigationBackground;
 
     h2 {
         @extend %hidden;
     }
 
-    ul {
+    a {
+        display: block;
+        padding: 0 15px;
+        line-height: 50px;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .nav-links {
         display: flex;
         flex-flow: row wrap;
         list-style: none;
 
         a {
-            display: block;
-            padding: 15px;
-            height: 50px;
-            color: #fff;
             font-weight: bold;
-            text-decoration: none;
 
             &:hover, &:focus {
                 background: lighten($tableNavigationBackground, 10%);
@@ -199,7 +210,43 @@
         }
 
         .current a {
-            background: lighten($tableNavigationBackground, 15%);
+            background: $primaryColor;
+            background: linear-gradient(to bottom,
+                    lighten($primaryColor, 15%),
+                    $primaryColor);
+        }
+    }
+
+    .breadcrumbs {
+        display: flex;
+        flex-flow: row wrap;
+        list-style: none;
+
+        li span {
+            display: flex;
+            flex-flow: row nowrap;
+        }
+
+        li:not(:first-child) span {
+            padding-left: 0;
+
+            &::before {
+                content: "▸";
+                display: flex;
+                align-items: center;
+                color: #fff;
+                font-size: 24px;
+                font-weight: bold;
+                text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+            }
+        }
+
+        a {
+            padding: 0 5px;
+
+            &:hover, &:active, &:focus {
+                text-decoration: underline;
+            }
         }
     }
 }

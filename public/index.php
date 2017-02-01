@@ -2,6 +2,8 @@
 
 require '../vendor/autoload.php';
 
+session_start();
+
 // Determine if the server address is the same as the remote address to set debug.
 $debug = $_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR'];
 

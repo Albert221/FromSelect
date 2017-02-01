@@ -38,6 +38,22 @@
             </nav>
         </div>
         <main class="main">
+            <nav class="navbar">
+                {% block navbar %}
+                    {% if breadcrumbs is defined %}
+                        <h2>Breadcrumbs</h2>
+                        <ul class="breadcrumbs">
+                            {% for crumb in breadcrumbs %}
+                                <li><span><a href="{{ crumb.url }}">{{ crumb.name }}</a></span></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <h2>Global links</h2>
+                    <ul class="nav-links">
+                        <li><a href="#">placeholder</a></li>
+                    </ul>
+                {% endblock %}
+            </nav>
             {% block main '' %}
         </main>
         {% block scripts %}

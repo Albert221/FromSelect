@@ -5,22 +5,16 @@
 use FromSelect\Controller\DatabaseController;
 use FromSelect\Controller\TableController;
 use FromSelect\Repository\DatabaseRepository;
+use FromSelect\Repository\MySQLDatabaseRepository;
+use FromSelect\Repository\MySQLTableRepository;
 use FromSelect\Repository\TableRepository;
 
 $container[DatabaseRepository::class] = function ($c) {
-    return new \FromSelect\Repository\MySQLDatabaseRepository($c['pdo']);
+    return new MySQLDatabaseRepository($c['pdo']);
 };
 
-// @TODO: Move this to a better place.
-$container->extend('view', function (\Slim\Views\Twig $twig, $c) {
-    $twig->getEnvironment()->addGlobal('databaseTree',
-        $c[DatabaseRepository::class]->tree());
-
-    return $twig;
-});
-
 $container[TableRepository::class] = function ($c) {
-    return new \FromSelect\Repository\MySQLTableRepository($c['pdo']);
+    return new MySQLTableRepository($c['pdo']);
 };
 
 $container[DatabaseController::class] = function ($c) {

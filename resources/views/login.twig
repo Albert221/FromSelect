@@ -11,20 +11,23 @@
                 <h1><span>From</span>Select</h1>
             </header>
             <form action="{{ path_for('login.auth') }}" method="post">
+                {% if error is not empty %}
+                    <p class="error">{{ error }}</p>
+                {% endif %}
                 <div class="columns">
                     <div class="host-group">
                         <label for="host">Host</label>
-                        <input type="text" name="host" id="host" placeholder="Eg. localhost" required>
+                        <input type="text" name="host" id="host" placeholder="I.e. localhost" required>
                     </div>
                     <div class="port-group">
                         <label for="port">Port</label>
                         <input type="text" name="port" id="port" value="3306" required>
                     </div>
                 </div>
-                <label for="user">Username</label>
-                <input type="text" name="user" id="user" placeholder="Eg. root" autocomplete="off" required>
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" placeholder="I.e. root" required>
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" autocomplete="off">
+                <input type="password" name="password" id="password">
                 <input type="submit" value="Connect">
             </form>
         </section>

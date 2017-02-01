@@ -23,6 +23,8 @@ Element.prototype.matches = Element.prototype.matches
             targetButton.textContent = '–';
             targetButton.setAttribute('aria-label', 'Collapse');
         }
+
+        targetButton.blur();
     });
 
 
@@ -53,7 +55,6 @@ Element.prototype.matches = Element.prototype.matches
                 return;
             }
 
-            // TODO: Somehow do what should be done, e.g. aria-label and plus or minus symbol.
             if (database != '' && table != '') {
                 databaseEl.classList.add('search-expanded');
             }

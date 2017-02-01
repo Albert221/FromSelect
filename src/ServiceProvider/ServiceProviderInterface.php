@@ -7,7 +7,7 @@ use FromSelect\FromSelect;
 interface ServiceProviderInterface
 {
     /**
-     * Provide services
+     * Provide services.
      *
      * @param FromSelect $app
      */

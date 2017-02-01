@@ -3,7 +3,7 @@
 namespace FromSelect\ServiceProvider;
 
 use FromSelect\FromSelect;
-use FromSelect\PDO;
+use FromSelect\PDO\PDO;
 
 class PDOServiceProvider implements ServiceProviderInterface
 {
@@ -23,7 +23,7 @@ class PDOServiceProvider implements ServiceProviderInterface
                 $config['port']
             );
 
-            $pdo = new PDO($dsn, $config['user'], $config['password'], [
+            $pdo = new PDO($dsn, $config['username'], $config['password'], [
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 PDO::ATTR_EMULATE_PREPARES => false
             ]);
@@ -32,19 +32,31 @@ class PDOServiceProvider implements ServiceProviderInterface
         };
     }
 
+    /**
+     * Returns connection configuration.
+     *
+     * @return array
+     */
     private function getConfig()
     {
         $defaultConfig = [
             'allow_overrides' => false,
             'host' => 'localhost',
             'port' => 3306,
-            'user' => 'root',
+            'username' => 'root',
             'password' => null
         ];
 
         $iniConfigPath = dirname(dirname(__DIR__)).'/config.ini';
-        $iniConfig = parse_ini_file($iniConfigPath, true)['connection'];
 
-        return array_merge($defaultConfig, $iniConfig);
+        if (file_exists($iniConfigPath)) {
+            $iniConfig = parse_ini_file($iniConfigPath, true)['connection'];
+        } else {
+            $iniConfig = [];
+        }
+
+        $sessionConfig = isset($_SESSION['connection']) ? $_SESSION['connection'] : [];
+
+        return array_merge(array_merge($defaultConfig, $iniConfig), $sessionConfig);
     }
 }

@@ -23,6 +23,18 @@
                 background: $mainTableEvenBackground;
             }
 
+            &.checked {
+                background: lighten($primaryColor, 45%);
+
+                &:nth-child(even) {
+                    background: lighten($primaryColor, 40%);
+                }
+            }
+
+            &:hover, &:hover:nth-child(even) {
+                background: lighten($primaryColor, 30%);
+            }
+
             td {
                 // TODO: Calculate max width of row in JS as for the most perfect fit.
                 max-width: 50vw;

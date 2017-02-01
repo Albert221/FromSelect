@@ -3,7 +3,9 @@
     border-radius: 3px;
     padding: 7px 15px;
     background: $background;
-    background: linear-gradient(to bottom, $background, darken($background, 10%));
+    background: linear-gradient(to bottom,
+            lighten($background, 15%),
+            $background);
     color: #fff;
     text-decoration: none;
     text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
@@ -13,7 +15,9 @@
 
     &:hover, &:focus {
         background: lighten($background, 10%);
-        background: linear-gradient(to bottom, lighten($background, 10%), $background);
+        background: linear-gradient(to bottom,
+                lighten($background, 25%),
+                lighten($background, 10%));
     }
 
     &:focus {

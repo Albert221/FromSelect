@@ -2,14 +2,16 @@
 
 {% import '@fromselect/parts/macros.twig' as macros %}
 
+{% block navbar %}
+    <h2>Databases navigation</h2>
+    <ul class="nav-links">
+        <li class="current"><a href="{{ path_for('databases.all') }}">Databases</a></li>
+        <li><a href="#">SQL</a></li>
+    </ul>
+    {{ parent() }}
+{% endblock %}
+
 {% block main %}
-    <nav class="navbar">
-        <h2>Databases navigation</h2>
-        <ul>
-            <li class="current"><a href="{{ path_for('databases.all') }}">Databases</a></li>
-            <li><a href="#">SQL</a></li>
-        </ul>
-    </nav>
     <div class="content">
         <form action="#" method="post" class="actions" id="actions">
             <span>Selected:</span>
@@ -37,3 +39,9 @@
         </table>
     </div>
 {% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script src="{{ base_url() }}/assets/main-table.js"></script>
+{% endblock %}
+
