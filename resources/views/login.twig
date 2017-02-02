@@ -7,8 +7,10 @@
     </head>
     <body class="login-body">
         <section class="login">
-            <header class="header no-a">
-                <h1><span>From</span>Select</h1>
+            <header class="header">
+                <h1>
+                    <a href="{{ path_for('databases.all') }}"><span>From</span>Select</a>
+                </h1>
             </header>
             <form action="{{ path_for('connection.auth') }}" method="post">
                 {% if error is not empty %}
