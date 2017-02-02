@@ -29,7 +29,7 @@
     });
 
     dataTables.forEach(dataTable => {
-        if (dataTable.clientWidth <= dataTable.parentNode.clientWidth) {
+        if (!dataTable.classList.contains('optimal-width')) {
             return;
         }
 
@@ -37,6 +37,7 @@
         const columnsCount = rows[0].querySelectorAll('tr > td').length;
 
         let widths = [];
+        let fontWidths = [];
         rows.forEach(row => {
             row.querySelectorAll('tr > td').forEach((field, i) => {
                 if (isNaN(widths[i])) {
@@ -44,27 +45,34 @@
                 }
 
                 if (i == 0) {
-                    widths[0] += field.clientWidth;
+                    widths[0] = field.clientWidth;
                     return;
                 }
 
-                const font = window.getComputedStyle(field, null).font;
-                widths[i] += getTextWidth(field.textContent, font);
+                // FIXME: This is ignoring checkbox because of no text.
+                // Add two times 15 px because padding
+                const cellWidth = getTextWidth(field.textContent, window.getComputedStyle(field, null).font) + 30;
+                widths[i] += cellWidth;
+
+                fontWidths[i] = fontWidths[i] === undefined ?
+                    cellWidth : Math.max(fontWidths[i], cellWidth);
             });
         });
 
         const columns = document.createElement('colgroup');
-        widths.forEach((heightSum, i) => {
-            const width = heightSum / columnsCount;
+        widths.forEach((widthSum, i) => {
+            let width = widthSum / columnsCount;
+            width = Math.min(width, dataTable.clientWidth * 0.5);
+
+            if (width < 60) {
+                width = fontWidths[i];
+            }
+
             const column = document.createElement('col');
             column.setAttribute('style', 'width: ' + width + 'px');
             columns.appendChild(column);
         });
 
-        // For some reason this does not work
         dataTable.appendChild(columns);
-
-        console.log(columns);
-
     });
 })();
