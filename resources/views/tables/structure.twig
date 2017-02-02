@@ -71,7 +71,9 @@
             <tbody>
                 {% for index in indexes %}
                     <tr>
-                        <td>{{ index.name }}</td>
+                        <td>
+                            {{ indexes[loop.index0 - 1].name != index.name ? index.name }}
+                        </td>
                         <td>{{ index.columnName }}</td>
                         <td>{{ index.collation }}</td>
                         <td>{{ index.type }}</td>
