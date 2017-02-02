@@ -35,6 +35,8 @@ class TwigServiceProvider implements ServiceProviderInterface
             // Databases & tables sidebar tree.
             $twig->getEnvironment()->addGlobal('databaseTree',
                 $c[DatabaseRepository::class]->tree());
+            // FIXME: This definetely is not good way and place to do that.
+            $twig->getEnvironment()->addGlobal('logged', isset($_SESSION['connection']));
 
             return $twig;
         };

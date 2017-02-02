@@ -50,7 +50,11 @@
                     {% endif %}
                     <h2>Global links</h2>
                     <ul class="nav-links">
-                        <li><a href="#">placeholder</a></li>
+                        {% if logged %}
+                            <li><a href="{{ path_for('login.logout') }}">Disconnect</a></li>
+                        {% else %}
+                            <li><a href="{{ path_for('login.login') }}">Connect</a></li>
+                        {% endif %}
                     </ul>
                 {% endblock %}
             </nav>
