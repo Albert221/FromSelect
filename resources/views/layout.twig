@@ -51,9 +51,9 @@
                     <h2>Global links</h2>
                     <ul class="nav-links">
                         {% if logged %}
-                            <li><a href="{{ path_for('login.logout') }}">Disconnect</a></li>
+                            <li><a href="{{ path_for('connection.disconnect') }}">Disconnect</a></li>
                         {% else %}
-                            <li><a href="{{ path_for('login.login') }}">Connect</a></li>
+                            <li><a href="{{ path_for('connection.connect') }}">Connect to different server</a></li>
                         {% endif %}
                     </ul>
                 {% endblock %}

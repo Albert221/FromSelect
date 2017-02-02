@@ -7,17 +7,17 @@ use Psr\Http\Message\ResponseInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-class LoginController extends AbstractController
+class ConnectionController extends AbstractController
 {
     /**
-     * login.login: GET /login
+     * connection.connect: GET /connect
      *
      * @param Request $request
      * @param Response $response
      *
      * @return ResponseInterface
      */
-    public function login(Request $request, Response $response)
+    public function connect(Request $request, Response $response)
     {
         return $this->twig->render($response, '@fromselect/login.twig', [
             'error' => $request->getQueryParam('error')
@@ -25,7 +25,7 @@ class LoginController extends AbstractController
     }
 
     /**
-     * login.auth: POST /login
+     * connection.auth: POST /connect
      *
      * @param Request $request
      * @param Response $response
@@ -44,7 +44,7 @@ class LoginController extends AbstractController
         if (!$validator->validate()) {
             return $response->withStatus(302)->withHeader(
                 'Location',
-                $this->router->pathFor('login.login', [], [
+                $this->router->pathFor('connection.connect', [], [
                     'error' => 'Wrong credentials :('
                 ])
             );
@@ -62,14 +62,14 @@ class LoginController extends AbstractController
     }
 
     /**
-     * login.logout: GET /logout
+     * connection.disconnect: GET /disconnect
      *
      * @param Request $request
      * @param Response $response
      *
      * @return ResponseInterface
      */
-    public function logout(Request $request, Response $response)
+    public function disconnect(Request $request, Response $response)
     {
         unset($_SESSION['connection']);
 

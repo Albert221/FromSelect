@@ -3,15 +3,15 @@
 /** @var $app FromSelect */
 
 use FromSelect\Controller\DatabaseController;
-use FromSelect\Controller\LoginController;
+use FromSelect\Controller\ConnectionController;
 use FromSelect\Controller\TableController;
 use FromSelect\FromSelect;
 
 $app->get('/', DatabaseController::class.':all')->setName('databases.all');
 
-$app->get('/login', LoginController::class.':login')->setName('login.login');
-$app->post('/login', LoginController::class.':auth')->setName('login.auth');
-$app->get('/logout', LoginController::class.':logout')->setName('login.logout');
+$app->get('/connect', ConnectionController::class.':connect')->setName('connection.connect');
+$app->post('/connect', ConnectionController::class.':auth')->setName('connection.auth');
+$app->get('/disconnect', ConnectionController::class.':disconnect')->setName('connection.disconnect');
 
 $app->get('/db/new', DatabaseController::class.':newAction')->setName('databases.new');
 $app->get('/db/{database}', DatabaseController::class.':show')->setName('databases.show');

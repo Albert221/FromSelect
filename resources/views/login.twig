@@ -10,7 +10,7 @@
             <header class="header no-a">
                 <h1><span>From</span>Select</h1>
             </header>
-            <form action="{{ path_for('login.auth') }}" method="post">
+            <form action="{{ path_for('connection.auth') }}" method="post">
                 {% if error is not empty %}
                     <p class="error">{{ error }}</p>
                 {% endif %}
