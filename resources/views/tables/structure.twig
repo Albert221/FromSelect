@@ -3,7 +3,7 @@
 {% block navbar %}
     <h2>Table navigation</h2>
     <ul class="nav-links">
-        <li><a href="{{ path_for('tables.show', {'database': current.database, 'table': current.table}) }}">Tables</a></li>
+        <li><a href="{{ path_for('tables.show', {'database': current.database, 'table': current.table}) }}">Data</a></li>
         <li class="current"><a href="{{ path_for('tables.structure', {'database': current.database, 'table': current.table}) }}">Structure</a></li>
         <li><a href="#">Operations</a></li>
     </ul>
